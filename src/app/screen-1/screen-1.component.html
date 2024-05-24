@@ -1,45 +1,51 @@
 <!DOCTYPE html>
 <ids-container padding="8">
   <ids-theme-switcher mode="light"></ids-theme-switcher>
-  
+
   <ids-layout-grid>
     <ids-text font-size="12" type="h1">Customer New</ids-text>
   </ids-layout-grid>
   <ids-layout-grid auto-fit="true" padding="md">
     <ids-layout-grid-cell>
 
-      <ids-input type="text" label="Customer Name" validate="required" value=""></ids-input>
-      
+      <!-- Customer Name -->
+      <ids-input type="text" label="Customer Name" validate="required" [(ngModel)]="customerName" value=""></ids-input>
+
       <!-- Source Product Dropdown -->
-      <ids-dropdown id="sourceProductDropdown" label="Source Product" [(ngModel)]="selectedSourceProduct" (change)="setVersionsForSelectedSourceProduct($event)" validate="required">
-        <ids-list-box>
-          <ids-list-box-option id="fc" value="fc">Facts</ids-list-box-option>
-          <ids-list-box-option id="syt" value="syt">Syteline</ids-list-box-option>
-          <ids-list-box-option id="b4" value="b4">Baan4</ids-list-box-option>
-        </ids-list-box>
-      </ids-dropdown>
-      <!-- Source Version Dropdown -->
-      <ids-dropdown id="sourceVersionDropdown" label="Source Version" [(ngModel)]="selectedSourceVersion">
-        <ids-list-box>
-          <ids-list-box-option *ngFor="let sourceVersion of sourceVersions" [value]="sourceVersion">{{ sourceVersion }}</ids-list-box-option>
-        </ids-list-box>
-      </ids-dropdown>
+      <div class="dropdown-group">
+        <ids-dropdown id="sourceProductDropdown" label="Source Product" [(ngModel)]="selectedSourceProduct" (change)="setVersionsForSelectedSourceProduct($event)" validate="required">
+          <ids-list-box>
+            <ids-list-box-option id="fc" value="fc">Facts</ids-list-box-option>
+            <ids-list-box-option id="syt" value="syt">Syteline</ids-list-box-option>
+            <ids-list-box-option id="b4" value="b4">Baan4</ids-list-box-option>
+          </ids-list-box>
+        </ids-dropdown>
+        <!-- Source Version Dropdown -->
+        <ids-dropdown id="sourceVersionDropdown" label="Source Version" [(ngModel)]="selectedSourceVersion" (change)="setSelectedSourceVersion($event)" validate="required">
+          <ids-list-box>
+            <ids-list-box-option *ngFor="let sourceVersion of sourceVersions" [value]="sourceVersion">{{ sourceVersion }}</ids-list-box-option>
+          </ids-list-box>
+        </ids-dropdown>
+      </div>
 
       <!-- Target Dropdown -->
-      <ids-dropdown id="targetProductDropdown" label="Target Product" [(ngModel)]="selectedTargetProduct" (change)="setVersionsForSelectedTargetProduct($event)" validate="required">
-        <ids-list-box>
-          <ids-list-box-option id="csi" value="csi">Cloud Suite Industrial (CSI)</ids-list-box-option>
-          <ids-list-box-option id="ln" value="ln">Infor LN</ids-list-box-option>
-          <ids-list-box-option id="csf" value="csf">CSF</ids-list-box-option>
-        </ids-list-box>
-      </ids-dropdown>
-    <!-- Target Version Dropdown -->
-      <ids-dropdown id="targetVersionDropdown" label="Target Version" [(ngModel)]="selectedTargetVersion">
-        <ids-list-box>
-          <ids-list-box-option *ngFor="let targetVersion of targetVersions" [value]="targetVersion">{{ targetVersion }}</ids-list-box-option>
-        </ids-list-box>
-      </ids-dropdown>
+      <div class="dropdown-group">
+        <ids-dropdown id="targetProductDropdown" label="Target Product" [(ngModel)]="selectedTargetProduct" (change)="setSelectedTargetProduct($event)" validate="required">
+          <ids-list-box>
+            <ids-list-box-option id="csi" value="csi">Cloud Suite Industrial (CSI)</ids-list-box-option>
+            <ids-list-box-option id="ln" value="ln">Infor LN</ids-list-box-option>
+            <ids-list-box-option id="csf" value="csf">CSF</ids-list-box-option>
+          </ids-list-box>
+        </ids-dropdown>
 
+        <!-- Mapping Group Name -->
+        <ids-input type="text" label="Mapping Group Name" readonly="true" [value]="mappingGroupName"></ids-input>
+      </div>
+
+      <!-- Save button -->
+      <ids-button id="submit" (click)="save()" appearance="primary">
+        <span>Save</span>
+      </ids-button>
 
     </ids-layout-grid-cell>
   </ids-layout-grid>
