@@ -1,0 +1,37 @@
+[
+    {
+        "customerName": "testCustomerName",
+        "sourceProduct": "testSourceProduct",
+        "sourceProductVersion": "sourceProductVersion",
+        "targetProduct": "targetProduct",
+        "MappingGroupName": "1(2)1"
+    },
+    {
+        "customerName": "testCustomerName2",
+        "sourceProduct": "testSourceProduct2",
+        "sourceProductVersion": "sourceProductVersion2",
+        "targetProduct": "targetProduct2",
+        "MappingGroupName": "1(2)2"
+    },
+    {
+        "customerName": "testCustomerName3",
+        "sourceProduct": "testSourceProduct3",
+        "sourceProductVersion": "sourceProductVersion3",
+        "targetProduct": "targetProduct3",
+        "MappingGroupName": "1(2)3"
+    },
+    {
+        "customerName": "testCustomerName4",
+        "sourceProduct": "testSourceProduct4",
+        "sourceProductVersion": "sourceProductVersion4",
+        "targetProduct": "targetProduct4",
+        "MappingGroupName": "1(2)4"
+    },
+    {
+        "customerName": "testCustomerNam5",
+        "sourceProduct": "testSourceProduct5",
+        "sourceProductVersion": "sourceProductVersion5",
+        "targetProduct": "targetProduct5",
+        "MappingGroupName": "1(2)5"
+    }
+]

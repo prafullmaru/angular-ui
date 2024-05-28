@@ -10,12 +10,14 @@ import 'ids-enterprise-wc/enterprise-wc.js';
 export class AppMenuComponent implements OnInit, AfterViewInit {
   @ViewChild('appMenuDrawer', { read: ElementRef }) appMenuDrawer!: ElementRef<HTMLElement>;
   @ViewChild('appMenuTriggerBtn', { read: ElementRef }) appMenuTriggerBtn!: ElementRef<HTMLElement>;
-  public disabled: boolean = false;
+  public disabled: boolean = true;
 
   constructor(private router: Router) {}
 
   navigateTo(screen: string) {
     this.router.navigate([`/${screen}`]);
+    console.log(screen);
+
   }
 
   ngOnInit(): void {
@@ -31,14 +33,13 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
   }
 
   enableTriggerButton() {
-    this.disabled = false;
+    this.disabled = true;
   }
 
-  handleSelected() {
+  handleSelected(e: CustomEvent) {
+    // console.info(`Header "${(e.target as any).textContent.trim()}" was selected.`);
+    console.log('Selected event: ', e.detail);
 
   }
   
-    // handleSelected(e: CustomEvent) {
-  //   console.info(`Header "${(e.target as any).textContent.trim()}" was selected.`);
-  // }
 }

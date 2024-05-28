@@ -1,24 +1,31 @@
 <ids-container padding="8">
-  <ids-theme-switcher mode="light"></ids-theme-switcher>
-
-  <ids-layout-grid>
-    <ids-layout-grid-cell>
-      <ids-button
-        #appMenuTriggerBtn 
-        id="app-menu-trigger" 
-        icon="menu" 
-        (click)="disableTriggerButton()"
-      >
-        <span class="audible">Open App Menu</span>
-      </ids-button>
-    </ids-layout-grid-cell>
-  </ids-layout-grid>
+  <!-- <ids-theme-switcher mode="light"></ids-theme-switcher> -->
+  <!-- Page Header -->
+  <ids-header>
+    <ids-toolbar>
+      <ids-toolbar-section type="button">
+        <ids-button
+          #appMenuTriggerBtn 
+          id="app-menu-trigger" 
+          icon="menu" 
+          (click)="disableTriggerButton()"
+        >
+          <span class="audible">Open App Menu</span>
+        </ids-button>
+      </ids-toolbar-section>
+      <ids-toolbar-section type="title">
+        <ids-text font-size="20" type="h1">Customer New</ids-text>
+      </ids-toolbar-section>
+      <ids-toolbar-section align="end" type="button">
+        <ids-theme-switcher mode="light"></ids-theme-switcher>
+      </ids-toolbar-section>
+    </ids-toolbar>
+  </ids-header>
 
   <ids-app-menu 
     #appMenuDrawer 
     id="app-menu"
     (hide)="enableTriggerButton()"
-    (selected)="handleSelected()"
   >
 
     <ids-search-field 
@@ -32,23 +39,43 @@
     ></ids-search-field>
 
     <!-- Main Content (Accordion Navigation) -->
-
-
     <ids-accordion>
       <ids-accordion-panel>
 
+        <!-- Customer -->
         <ids-accordion-header slot="header" icon="user">
           <ids-text font-size="16">Customer</ids-text>
         </ids-accordion-header>
+        <ids-accordion-panel slot="content">
+          <ids-accordion-header slot="header">
+            <ids-text font-size="14">Inquire</ids-text>
+          </ids-accordion-header>
+          <ids-accordion-panel slot="content">
+            <ids-accordion-header slot="header" (click)="navigateTo('screen1')">
+              <ids-text font-size="14">Customer</ids-text>
+            </ids-accordion-header>
+          </ids-accordion-panel>
+          <ids-accordion-panel slot="content">
+            <ids-accordion-header slot="header" (click)="navigateTo('screen2')">
+              <ids-text font-size="14">Customer Sites</ids-text>
+            </ids-accordion-header>
+          </ids-accordion-panel>
+        </ids-accordion-panel>
 
         <ids-accordion-panel slot="content">
-          <ids-accordion-header slot="header" (click)="navigateTo('screen1')">
-            <ids-text font-size="14">New Customer</ids-text>
+          <ids-accordion-header slot="header">
+            <ids-text font-size="14">Setup</ids-text>
           </ids-accordion-header>
-          
-          <ids-accordion-header slot="header" (click)="navigateTo('screen2')">
-            <ids-text font-size="14">Screen 2</ids-text>
-          </ids-accordion-header>
+          <ids-accordion-panel slot="content">
+            <ids-accordion-header slot="header" (click)="navigateTo('screen1')">
+              <ids-text font-size="14">New Customer</ids-text>
+            </ids-accordion-header>
+          </ids-accordion-panel>
+          <ids-accordion-panel slot="content">
+            <ids-accordion-header slot="header" (click)="navigateTo('screen2')">
+              <ids-text font-size="14">Customer Sites</ids-text>
+            </ids-accordion-header>
+          </ids-accordion-panel>
         </ids-accordion-panel>
       </ids-accordion-panel>
     </ids-accordion>
