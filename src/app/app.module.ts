@@ -5,11 +5,13 @@ import { AppMenuComponent } from './app-menu/app-menu.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Screen1Component } from './screen-1/screen-1.component';
+import { Screen2Component } from './screen-2/screen-2.component';
 @NgModule({
   declarations: [
     AppComponent,
     Screen1Component,
     AppMenuComponent,
+    Screen2Component,
   ],
   imports: [
     BrowserModule,

@@ -1,98 +1,75 @@
-      <ids-container padding="8" hidden>
-        <ids-theme-switcher mode="light"></ids-theme-switcher>
-      
-        <ids-layout-grid>
-          <ids-layout-grid-cell>
-            <ids-button
-              #appMenuTriggerBtn 
-              id="app-menu-trigger" 
-              icon="menu" 
-              (click)="disableTriggerButton()"
-            >
-              <span class="audible">Open App Menu</span>
-            </ids-button>
-          </ids-layout-grid-cell>
-        </ids-layout-grid>
-      
-        <ids-app-menu 
-          #appMenuDrawer 
-          id="app-menu"
-          (hide)="enableTriggerButton()"
-          (selected)="handleSelected()"
-        >
-          <!-- Avatar/Username Area -->
-          <!-- <ids-text slot="username" font-size="24" font-weight="bold">Migration Screen</ids-text> -->
-      
-          <!-- Header Toolbar -->
-          <!-- <ids-toolbar slot="header">
-            <ids-toolbar-section align="center-even" type="fluid">
-              <ids-button id="header-btn-download" icon="download">
-                <ids-text audible>Download</ids-text>
-              </ids-button>
-              <ids-button id="header-btn-print" icon="print">
-                <ids-text audible>Print</ids-text>
-              </ids-button>
-              <ids-button id="header-btn-purchasing" icon="purchasing">
-                <ids-text audible>Purchasing</ids-text>
-              </ids-button>
-              <ids-button id="header-btn-notification" icon="notification">
-                <ids-text audible>Notification</ids-text>
-              </ids-button>
-              <ids-button id="header-btn-inventory" icon="inventory">
-                <ids-text audible>Inventory</ids-text>
-              </ids-button>
-            </ids-toolbar-section>
-          </ids-toolbar> -->
-      
-          <ids-search-field 
-            id="search" 
-            clearable
-            label="Application Menu Search" 
-            color-variant="app-menu" 
-            label-state="collapsed" 
-            no-margins="true"
-            slot="search"
-          ></ids-search-field>
-      
-          <!-- Main Content (Accordion Navigation) -->
-          <ids-accordion>
-            <ids-accordion-panel>
-              <ids-accordion-header slot="header" icon="user">
-                <ids-text font-size="16">Customer</ids-text>
-              </ids-accordion-header>
-              <ids-accordion-panel slot="content">
-                <ids-accordion-header slot="header">
-                  <ids-text font-size="14">Setup</ids-text>
+<ids-container padding="8">
+  <ids-theme-switcher mode="light"></ids-theme-switcher>
 
-                </ids-accordion-header>
-              </ids-accordion-panel>
-              <ids-accordion-panel slot="content">
-                </ids-accordion-panel>
-              </ids-accordion-panel>
-              <ids-accordion-panel slot="content">
-              </ids-accordion-panel>
-            <ids-accordion-panel>
-            </ids-accordion-panel>
-          </ids-accordion>
-      
-          <!-- Footer Toolbar -->
-          <ids-toolbar slot="footer">
-            <ids-toolbar-section align="center-even" type="fluid">
-              <ids-button id="footer-btn-settings">
-                <ids-icon icon="settings"></ids-icon>
-                <span>Settings</span>
-              </ids-button>
-              <ids-button id="footer-btn-proxy" icon="employee-directory">
-                <ids-text audible>Proxy as User</ids-text>
-              </ids-button>
-              <ids-button id="footer-btn-about" icon="info">
-                <ids-text audible>About This Application</ids-text>
-              </ids-button>
-              <ids-button id="footer-btn-logout" icon="logout">
-                <ids-text audible>Logout</ids-text>
-              </ids-button>
-            </ids-toolbar-section>
-          </ids-toolbar>
-        </ids-app-menu>
-      </ids-container>
-  
+  <ids-layout-grid>
+    <ids-layout-grid-cell>
+      <ids-button
+        #appMenuTriggerBtn 
+        id="app-menu-trigger" 
+        icon="menu" 
+        (click)="disableTriggerButton()"
+      >
+        <span class="audible">Open App Menu</span>
+      </ids-button>
+    </ids-layout-grid-cell>
+  </ids-layout-grid>
+
+  <ids-app-menu 
+    #appMenuDrawer 
+    id="app-menu"
+    (hide)="enableTriggerButton()"
+    (selected)="handleSelected()"
+  >
+
+    <ids-search-field 
+      id="search" 
+      clearable
+      label="Application Menu Search" 
+      color-variant="app-menu" 
+      label-state="collapsed" 
+      no-margins="true"
+      slot="search"
+    ></ids-search-field>
+
+    <!-- Main Content (Accordion Navigation) -->
+
+
+    <ids-accordion>
+      <ids-accordion-panel>
+
+        <ids-accordion-header slot="header" icon="user">
+          <ids-text font-size="16">Customer</ids-text>
+        </ids-accordion-header>
+
+        <ids-accordion-panel slot="content">
+          <ids-accordion-header slot="header" (click)="navigateTo('screen1')">
+            <ids-text font-size="14">New Customer</ids-text>
+          </ids-accordion-header>
+          
+          <ids-accordion-header slot="header" (click)="navigateTo('screen2')">
+            <ids-text font-size="14">Screen 2</ids-text>
+          </ids-accordion-header>
+        </ids-accordion-panel>
+      </ids-accordion-panel>
+    </ids-accordion>
+
+    <!-- Footer Toolbar -->
+    <ids-toolbar slot="footer">
+      <ids-toolbar-section align="center-even" type="fluid">
+        <ids-button id="footer-btn-settings">
+          <ids-icon icon="settings"></ids-icon>
+          <span>Settings</span>
+        </ids-button>
+        <ids-button id="footer-btn-proxy" icon="employee-directory">
+          <ids-text audible>Proxy as User</ids-text>
+        </ids-button>
+        <ids-button id="footer-btn-about" icon="info">
+          <ids-text audible>About This Application</ids-text>
+        </ids-button>
+        <ids-button id="footer-btn-logout" icon="logout">
+          <ids-text audible>Logout</ids-text>
+        </ids-button>
+      </ids-toolbar-section>
+    </ids-toolbar>
+  </ids-app-menu>
+</ids-container>

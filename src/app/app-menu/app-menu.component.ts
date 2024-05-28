@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import 'ids-enterprise-wc/enterprise-wc.js';
 
 @Component({
-  selector: 'app-app-menu',
+  selector: 'app-menu',
   templateUrl: './app-menu.component.html',
   styleUrls: ['./app-menu.component.scss']
 })
@@ -11,10 +12,14 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
   @ViewChild('appMenuTriggerBtn', { read: ElementRef }) appMenuTriggerBtn!: ElementRef<HTMLElement>;
   public disabled: boolean = false;
 
-  constructor() { }
+  constructor(private router: Router) {}
+
+  navigateTo(screen: string) {
+    this.router.navigate([`/${screen}`]);
+  }
 
   ngOnInit(): void {
-    console.log('example init');
+    console.log('App Menu initialized');
   }
 
   ngAfterViewInit(): void {
@@ -22,18 +27,18 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
   }
   
   disableTriggerButton() {
-    this.disabled = false;
-  }
-
-  enableTriggerButton() {
     this.disabled = true;
   }
 
-  handleSelected() {
-    
+  enableTriggerButton() {
+    this.disabled = false;
   }
 
-  // handleSelected(e: CustomEvent) {
+  handleSelected() {
+
+  }
+  
+    // handleSelected(e: CustomEvent) {
   //   console.info(`Header "${(e.target as any).textContent.trim()}" was selected.`);
   // }
 }
