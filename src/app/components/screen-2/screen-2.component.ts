@@ -42,7 +42,7 @@ export class Screen2Component implements AfterViewInit {
       formatter: this.dataGrid.nativeElement.formatters.rowNumber,
       sortable: false,
       readonly: true,
-      width: 65
+      width: 50
     });
     this.columns.push({
       id: 'customerName',
@@ -51,7 +51,8 @@ export class Screen2Component implements AfterViewInit {
       formatter: this.dataGrid.nativeElement.formatters.text,
       // filterType: this.dataGrid.nativeElement.filters.text,
       sortable: true,  
-      resizable: true
+      resizable: true,
+      width: 250
     });
     this.columns.push({
       id: 'sourceProduct',
@@ -60,7 +61,9 @@ export class Screen2Component implements AfterViewInit {
       formatter: this.dataGrid.nativeElement.formatters.text,
       // filterType: this.dataGrid.nativeElement.filters.text,
       sortable: true,
-      resizable: true
+      resizable: true,
+      width: 250
+
     });
     this.columns.push({
       id: 'sourceProductVersion',
@@ -69,7 +72,9 @@ export class Screen2Component implements AfterViewInit {
       formatter: this.dataGrid.nativeElement.formatters.text,
       // filterType: this.dataGrid.nativeElement.filters.text,
       sortable: true,
-      resizable: true
+      resizable: true,
+      width: 250
+
     });
     this.columns.push({
       id: 'targetProduct',
@@ -78,7 +83,9 @@ export class Screen2Component implements AfterViewInit {
       formatter: this.dataGrid.nativeElement.formatters.text,
       // filterType: this.dataGrid.nativeElement.filters.text,
       sortable: true,
-      resizable: true
+      resizable: true,
+      width: 250
+
     });
     this.columns.push({
       id: 'MappingGroupName',
@@ -87,7 +94,8 @@ export class Screen2Component implements AfterViewInit {
       formatter: this.dataGrid.nativeElement.formatters.text,
       // filterType: this.dataGrid.nativeElement.filters.text,
       sortable: true,
-      resizable: true
+      resizable: false,
+
     });
 
     // Fetch data from form-data.json src/api/*.json
