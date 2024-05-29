@@ -1,11 +1,11 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import 'ids-enterprise-wc/enterprise-wc.js';
-import { AppMenuComponent } from './app-menu/app-menu.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { Screen1Component } from './screen-1/screen-1.component';
-import { Screen2Component } from './screen-2/screen-2.component';
+import { AppMenuComponent } from './components/app-menu/app-menu.component';
+import { Screen1Component } from './components/screen-1/screen-1.component';
+import { Screen2Component } from './components/screen-2/screen-2.component';
 @NgModule({
   declarations: [
     AppComponent,
