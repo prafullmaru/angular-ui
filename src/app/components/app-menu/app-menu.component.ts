@@ -14,10 +14,26 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
 
   constructor(private router: Router) {}
 
-  navigateTo(screen: string) {
-    this.router.navigate([`/${screen}`]);
-    console.log(screen);
+  currentTitle = 'Title';
 
+
+  navigateTo(screen: string) {
+    switch (screen) {
+      case 'screen1':
+        this.currentTitle = 'Customer';
+        this.router.navigate([`/${screen}`]);
+        break;
+      case 'screen2':
+        this.currentTitle = 'Customer Sites';
+        this.router.navigate([`/${screen}`]);
+        break;
+      case 'new-customer':
+        this.currentTitle = 'New Customer';
+        this.router.navigate([`/${screen}`]);
+        break;
+      default:
+        this.currentTitle = 'Title';
+    }
   }
 
   ngOnInit(): void {
