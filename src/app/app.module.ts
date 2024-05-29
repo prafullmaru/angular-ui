@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import 'ids-enterprise-wc/enterprise-wc.js';
@@ -16,6 +17,8 @@ import { Screen2Component } from './components/screen-2/screen-2.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
