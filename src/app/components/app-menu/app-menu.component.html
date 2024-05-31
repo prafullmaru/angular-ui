@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <ids-container padding="8">
   <!-- <ids-theme-switcher mode="light"></ids-theme-switcher> -->
   <!-- Page Header -->
@@ -10,18 +11,49 @@
             icon="menu" 
             (click)="disableTriggerButton()"
           >
-            <span class="audible">Open App Menu</span>
+            <!-- <span class="audible">Open App Menu</span> -->
           </ids-button>
         </ids-toolbar-section>
         <ids-toolbar-section type="title">
           <ids-text font-size="20" type="h1">{{ currentTitle }}</ids-text>
         </ids-toolbar-section>
+
+<!--Icon-Save-->
+      <ids-toolbar-section align="end" type="button">
+        <ids-button id="save" icon="save"></ids-button>
+      </ids-toolbar-section>
+
+<!--Icon-Cancel-->
+      <ids-toolbar-section align="end" type="button">
+        <ids-button id="cancel" icon="cancel"></ids-button>
+      </ids-toolbar-section>
+<!--Icon-Bolt-->
+      <ids-toolbar-section align="end" type="button">
+        <ids-button id="bolt" icon="bolt"></ids-button>
+      </ids-toolbar-section>
+
+<!--Icon-Rejected-->
+      <ids-toolbar-section align="end" type="button">
+        <ids-button id="rejected-outline" icon="rejected-outline"></ids-button>
+      </ids-toolbar-section>
+
+
+<!--Icon-user-profile-->
+        <ids-toolbar-section align="end" type="button">
+          <ids-button id="user-profile" icon="user-profile"></ids-button>
+        </ids-toolbar-section>
+
+<!--Theme Switcher-->        
         <ids-toolbar-section align="end" type="button">
           <ids-theme-switcher mode="light"></ids-theme-switcher>
         </ids-toolbar-section>
+
       </ids-toolbar>
     </ids-header>
+
+      <ids-layout-grid>
     <router-outlet></router-outlet>
+      </ids-layout-grid>
     
   
     <ids-app-menu 
@@ -45,9 +77,10 @@
         <ids-accordion-panel>
   
 <!-- Customer -->
-          <ids-accordion-header slot="header" icon="user">
+          <ids-accordion-header slot="header" icon="user-profile">
             <ids-text font-size="16">Customer</ids-text>
           </ids-accordion-header>
+      <!--Inquire-->
           <ids-accordion-panel slot="content">
             <ids-accordion-header slot="header">
               <ids-text font-size="14">Inquire</ids-text>
@@ -63,7 +96,8 @@
               </ids-accordion-header>
             </ids-accordion-panel>
           </ids-accordion-panel>
-  
+
+      <!--Setup-->
           <ids-accordion-panel slot="content">
             <ids-accordion-header slot="header">
               <ids-text font-size="14">Setup</ids-text>
@@ -139,12 +173,6 @@
       </ids-accordion-header>
     </ids-accordion-panel>
   </ids-accordion>
-
-
-
-
-
-
 
     </ids-app-menu>
   </ids-container>
