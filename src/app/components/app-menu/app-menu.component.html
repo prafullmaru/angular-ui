@@ -18,24 +18,11 @@
           <ids-text font-size="20" type="h1">{{ currentTitle }}</ids-text>
         </ids-toolbar-section>
 
-<!--Icon-Save-->
-      <ids-toolbar-section align="end" type="button">
-        <ids-button id="save" icon="save"></ids-button>
-      </ids-toolbar-section>
-
-<!--Icon-Cancel-->
-      <ids-toolbar-section align="end" type="button">
-        <ids-button id="cancel" icon="cancel"></ids-button>
-      </ids-toolbar-section>
-<!--Icon-Bolt-->
-      <ids-toolbar-section align="end" type="button">
-        <ids-button id="bolt" icon="bolt"></ids-button>
-      </ids-toolbar-section>
-
-<!--Icon-Rejected-->
-      <ids-toolbar-section align="end" type="button">
-        <ids-button id="rejected-outline" icon="rejected-outline"></ids-button>
-      </ids-toolbar-section>
+        <ng-container *ngFor="let icon of icons">
+          <ids-toolbar-section align="end" type="button">
+            <ids-button [id]="icon.id" [icon]="icon.icon" (click)="icon.action()"></ids-button>
+          </ids-toolbar-section>
+        </ng-container>
 
 
 <!--Icon-user-profile-->

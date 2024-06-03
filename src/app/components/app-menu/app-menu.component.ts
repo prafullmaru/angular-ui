@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import 'ids-enterprise-wc/enterprise-wc.js';
+import { filter } from 'rxjs';
+import { Icon, ToolbarService } from './toolbar.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,11 +10,12 @@ import 'ids-enterprise-wc/enterprise-wc.js';
   styleUrls: ['./app-menu.component.scss']
 })
 export class AppMenuComponent implements OnInit, AfterViewInit {
+  icons: Icon[] = [];
+
   @ViewChild('appMenuDrawer', { read: ElementRef }) appMenuDrawer!: ElementRef<HTMLElement>;
   @ViewChild('appMenuTriggerBtn', { read: ElementRef }) appMenuTriggerBtn!: ElementRef<HTMLElement>;
   public disabled: boolean = true;
-
-  constructor(private router: Router) {}
+  constructor(private router: Router, private toolbarService: ToolbarService) {}
 
   currentTitle = 'Title';
 
@@ -36,8 +39,24 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     console.log('App Menu initialized');
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      const route = this.router.routerState.snapshot.root.firstChild;
+      if (route && route.data['icons']) {
+        this.updateIcons(route.data['icons']);
+      }
+    });
+
+    this.toolbarService.currentIcons.subscribe(iconIds => {
+      this.icons = iconIds.map(id => ({
+        id,
+        icon: id,
+        action: this.getActionForIcon(id)
+      }));
+    });
   }
 
   ngAfterViewInit(): void {
@@ -57,5 +76,44 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
     console.log('Selected event: ', e.detail);
 
   }
-  
+
+  updateIcons(iconIds: string[]) {
+    this.icons = iconIds.map(id => ({
+      id,
+      icon: id,
+      action: this.getActionForIcon(id)
+    }));
+  }
+
+  getActionForIcon(icon: string): () => void {
+    switch (icon) {
+      case 'save':
+        return this.save.bind(this);
+      case 'cancel':
+        return this.cancel.bind(this);
+      case 'bolt':
+        return this.bolt.bind(this);
+      case 'rejected-outline':
+        return this.rejectedOutline.bind(this);
+      default:
+        return () => { console.log(`No action defined for ${icon}`); };
+    }
+  }
+
+  save() {
+    console.log('Save action triggered');
+  }
+
+  cancel() {
+    console.log('Cancel action triggered');
+  }
+
+  bolt() {
+    console.log('Bolt action triggered');
+  }
+
+  rejectedOutline() {
+    console.log('Rejected Outline action triggered');
+  }
+ 
 }

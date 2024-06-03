@@ -4,8 +4,12 @@ import { Screen1Component } from './components/screen-1/screen-1.component';
 import { Screen2Component } from './components/screen-2/screen-2.component';
 
 const routes: Routes = [
-  { path: 'screen1', component: Screen1Component },
-  { path: 'screen2', component: Screen2Component },
+  { path: 'screen1', component: Screen1Component,
+  data: { icons: ['save', 'cancel'] }
+   },
+  { path: 'screen2', component: Screen2Component,
+  data: { icons: ['bolt', 'rejected-outline'] }
+   },
   // { path: '', redirectTo: '/screen1', pathMatch: 'full' },
   // { path: '**', redirectTo: '/screen1' }
 ];

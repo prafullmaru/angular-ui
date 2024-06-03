@@ -4,34 +4,42 @@
         "sourceProduct": "testSourceProduct",
         "sourceProductVersion": "sourceProductVersion",
         "targetProduct": "targetProduct",
-        "MappingGroupName": "1(2)1"
+        "MappingGroupName": "1(2)1",
+        "Active": true
     },
     {
         "customerName": "testCustomerName2",
         "sourceProduct": "testSourceProduct2",
         "sourceProductVersion": "sourceProductVersion2",
         "targetProduct": "targetProduct2",
-        "MappingGroupName": "1(2)2"
+        "MappingGroupName": "1(2)2",
+        "Active": true
+
     },
     {
         "customerName": "testCustomerName3",
         "sourceProduct": "testSourceProduct3",
         "sourceProductVersion": "sourceProductVersion3",
         "targetProduct": "targetProduct3",
-        "MappingGroupName": "1(2)3"
+        "MappingGroupName": "1(2)3",
+        "Active": true
+
     },
     {
         "customerName": "testCustomerName4",
         "sourceProduct": "testSourceProduct4",
         "sourceProductVersion": "sourceProductVersion4",
         "targetProduct": "targetProduct4",
-        "MappingGroupName": "1(2)4"
+        "MappingGroupName": "1(2)4",
+        "Active": false
+
     },
     {
         "customerName": "testCustomerNam5",
         "sourceProduct": "testSourceProduct5",
         "sourceProductVersion": "sourceProductVersion5",
         "targetProduct": "targetProduct5",
-        "MappingGroupName": "1(2)5"
+        "MappingGroupName": "1(2)5",
+        "Active": false
     }
 ]

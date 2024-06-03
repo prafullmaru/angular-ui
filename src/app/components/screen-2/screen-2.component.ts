@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import 'ids-enterprise-wc/enterprise-wc.js';
+import formDataJSON from "../../../../src/api/form-data.json";
 
 interface GridColumn {
   id: string;
@@ -23,6 +24,7 @@ interface GridColumn {
 export class Screen2Component implements AfterViewInit {
   @ViewChild('dataGrid', { read: ElementRef }) dataGrid!: ElementRef;
   public columns: GridColumn[] = [];
+  public url: any = formDataJSON;
 
   constructor(private http: HttpClient) { }
 
@@ -52,7 +54,6 @@ export class Screen2Component implements AfterViewInit {
       // filterType: this.dataGrid.nativeElement.filters.text,
       sortable: true,  
       resizable: true,
-      width: 250
     });
     this.columns.push({
       id: 'sourceProduct',
@@ -62,7 +63,6 @@ export class Screen2Component implements AfterViewInit {
       // filterType: this.dataGrid.nativeElement.filters.text,
       sortable: true,
       resizable: true,
-      width: 250
 
     });
     this.columns.push({
@@ -73,7 +73,6 @@ export class Screen2Component implements AfterViewInit {
       // filterType: this.dataGrid.nativeElement.filters.text,
       sortable: true,
       resizable: true,
-      width: 250
 
     });
     this.columns.push({
@@ -84,7 +83,6 @@ export class Screen2Component implements AfterViewInit {
       // filterType: this.dataGrid.nativeElement.filters.text,
       sortable: true,
       resizable: true,
-      width: 250
 
     });
     this.columns.push({
@@ -94,7 +92,16 @@ export class Screen2Component implements AfterViewInit {
       formatter: this.dataGrid.nativeElement.formatters.text,
       // filterType: this.dataGrid.nativeElement.filters.text,
       sortable: true,
-      resizable: false,
+      resizable: true,
+    });
+    this.columns.push({
+      id: 'activeCheckbox',
+      name: 'Active',
+      field: 'Active',
+      sortable: true,
+      resizable: true,
+      formatter: this.dataGrid.nativeElement.formatters.checkbox,
+      align: 'center',
 
     });
 
