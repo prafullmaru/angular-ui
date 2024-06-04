@@ -1,45 +1,45 @@
 [
     {
-        "customerName": "testCustomerName",
-        "sourceProduct": "testSourceProduct",
-        "sourceProductVersion": "sourceProductVersion",
-        "targetProduct": "targetProduct",
-        "MappingGroupName": "1(2)1",
+        "customerName": "CSI_ABC_Corp",
+        "sourceProduct": "Syteline",
+        "sourceProductVersion": "8.0200",
+        "targetProduct": "CSI",
+        "MappingGroupName": "SyteLine(8.0200)ToCSI",
         "Active": true
     },
     {
-        "customerName": "testCustomerName2",
-        "sourceProduct": "testSourceProduct2",
-        "sourceProductVersion": "sourceProductVersion2",
-        "targetProduct": "targetProduct2",
-        "MappingGroupName": "1(2)2",
-        "Active": true
-
-    },
-    {
-        "customerName": "testCustomerName3",
-        "sourceProduct": "testSourceProduct3",
-        "sourceProductVersion": "sourceProductVersion3",
-        "targetProduct": "targetProduct3",
-        "MappingGroupName": "1(2)3",
+        "customerName": "XYZ Lumber NY",
+        "sourceProduct": "FACTS",
+        "sourceProductVersion": "9.0",
+        "targetProduct": "CSD",
+        "MappingGroupName": "FACTSToCSD",
         "Active": true
 
     },
     {
-        "customerName": "testCustomerName4",
-        "sourceProduct": "testSourceProduct4",
-        "sourceProductVersion": "sourceProductVersion4",
-        "targetProduct": "targetProduct4",
-        "MappingGroupName": "1(2)4",
+        "customerName": "XYZ Lumber NJ",
+        "sourceProduct": "FACTS",
+        "sourceProductVersion": "9.0",
+        "targetProduct": "CSD",
+        "MappingGroupName": "FACTSToCSD",
         "Active": false
 
     },
     {
-        "customerName": "testCustomerNam5",
-        "sourceProduct": "testSourceProduct5",
-        "sourceProductVersion": "sourceProductVersion5",
-        "targetProduct": "targetProduct5",
-        "MappingGroupName": "1(2)5",
-        "Active": false
+        "customerName": "Windmill Cheese",
+        "sourceProduct": "Expert",
+        "sourceProductVersion": "10.4",
+        "targetProduct": "LN",
+        "MappingGroupName": "XpertToLN",
+        "Active": true
+
+    },
+    {
+        "customerName": "Dairy America",
+        "sourceProduct": "Adage",
+        "sourceProductVersion": "6.0.3",
+        "targetProduct": "M3",
+        "MappingGroupName": "AdageToM3",
+        "Active": true
     }
 ]

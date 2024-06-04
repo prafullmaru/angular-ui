@@ -5,14 +5,14 @@
   <!-- <ids-layout-grid>
     <ids-text font-size="12" type="h1">Customer New</ids-text>
   </ids-layout-grid> -->
-  <ids-layout-grid auto-fit="true" padding="md">
+  <ids-layout-grid auto-fit="false" padding="md">
     <ids-layout-grid-cell>
 
       <!-- Customer Name -->
       <ids-input type="text" label="Customer Name" validate="required" [(ngModel)]="customerName" value=""></ids-input>
 
       <!-- Source Product Dropdown -->
-      <div class="dropdown-group">
+      <!-- <div class="dropdown-group"> -->
         <ids-dropdown id="sourceProductDropdown" label="Source Product" [(ngModel)]="selectedSourceProduct" (change)="setVersionsForSelectedSourceProduct($event)" validate="required">
           <ids-list-box>
             <ids-list-box-option id="fc" value="fc">Facts</ids-list-box-option>
@@ -26,10 +26,10 @@
             <ids-list-box-option *ngFor="let sourceVersion of sourceVersions" [value]="sourceVersion">{{ sourceVersion }}</ids-list-box-option>
           </ids-list-box>
         </ids-dropdown>
-      </div>
+      <!-- </div> -->
 
       <!-- Target Dropdown -->
-      <div class="dropdown-group">
+      <!-- <div class="dropdown-group"> -->
         <ids-dropdown id="targetProductDropdown" label="Target Product" [(ngModel)]="selectedTargetProduct" (change)="setSelectedTargetProduct($event)" validate="required">
           <ids-list-box>
             <ids-list-box-option id="csi" value="csi">Cloud Suite Industrial (CSI)</ids-list-box-option>
@@ -40,7 +40,7 @@
 
         <!-- Mapping Group Name -->
         <ids-input type="text" label="Mapping Group Name" readonly="true" [value]="mappingGroupName"></ids-input>
-      </div>
+      <!-- </div> -->
 
       <!-- Save button -->
       <ids-button id="submit" (click)="save()" appearance="primary">

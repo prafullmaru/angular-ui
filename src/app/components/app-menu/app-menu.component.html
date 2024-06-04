@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<ids-container padding="8">
+<ids-container padding="8" hidden>
   <!-- <ids-theme-switcher mode="light"></ids-theme-switcher> -->
   <!-- Page Header -->
     <ids-header>
@@ -18,11 +18,14 @@
   <ids-text font-size="20" type="h1" [innerHTML]="currentTitle"></ids-text>
 </ids-toolbar-section>
 
-        <ng-container *ngFor="let icon of icons">
-          <ids-toolbar-section align="end" type="button">
-            <ids-button [id]="icon.id" [icon]="icon.icon" (click)="icon.action()"></ids-button>
-          </ids-toolbar-section>
-        </ng-container>
+<ng-container *ngFor="let icon of icons">
+  <ids-toolbar-section align="end" type="button" *ngIf="!icon.isSearch">
+    <ids-button [id]="icon.id" [icon]="icon.icon" (click)="icon.action()"></ids-button>
+  </ids-toolbar-section>
+  <ids-toolbar-section align="end" type="input" *ngIf="icon.isSearch">
+    <ids-search-field clearable color-variant="alternate" label-state="collapsed" id="header-search" no-margins placeholder="Type to Search"></ids-search-field>
+  </ids-toolbar-section>
+</ng-container>
 
 
 <!--Icon-user-profile-->
@@ -43,7 +46,7 @@
       </ids-layout-grid>
     
   
-    <ids-app-menu 
+    <ids-app-menu
       #appMenuDrawer 
       id="app-menu"
       (hide)="enableTriggerButton()"

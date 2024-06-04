@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { NavigationEnd, Router } from '@angular/router';
 import 'ids-enterprise-wc/enterprise-wc.js';
 import { filter } from 'rxjs';
+import { Screen1Component } from '../screen-1/screen-1.component';
 import { Icon, ToolbarService } from './toolbar.service';
 
 @Component({
@@ -14,10 +15,11 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
 
   @ViewChild('appMenuDrawer', { read: ElementRef }) appMenuDrawer!: ElementRef<HTMLElement>;
   @ViewChild('appMenuTriggerBtn', { read: ElementRef }) appMenuTriggerBtn!: ElementRef<HTMLElement>;
+  @ViewChild(Screen1Component) screen1Component?: Screen1Component
   public disabled: boolean = true;
   constructor(private router: Router, private toolbarService: ToolbarService) {}
 
-  currentTitle = 'Title';
+  currentTitle = 'Welcome! ';
 
 
   navigateTo(screen: string) {
@@ -81,7 +83,8 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
     this.icons = iconIds.map(id => ({
       id,
       icon: id,
-      action: this.getActionForIcon(id)
+      action: this.getActionForIcon(id),
+      isSearch: id === 'search'
     }));
   }
 
@@ -95,6 +98,12 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
         return this.bolt.bind(this);
       case 'rejected-outline':
         return this.rejectedOutline.bind(this);
+      case 'edit':
+        return this.edit.bind(this);
+      case 'add':
+        return this.add.bind(this);
+      case 'copy':
+        return this.copy.bind(this);
       default:
         return () => { console.log(`No action defined for ${icon}`); };
     }
@@ -106,6 +115,8 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
 
   cancel() {
     console.log('Cancel action triggered');
+    // this.screen1Component.clearForm();
+
   }
 
   bolt() {
@@ -114,6 +125,17 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
 
   rejectedOutline() {
     console.log('Rejected Outline action triggered');
+  }
+
+  edit() {
+    console.log('Edit action triggered')
+  }
+
+  add() {
+    console.log('add action triggered')
+  }
+  copy() {
+    console.log('Copy action is triggered')
   }
  
 }

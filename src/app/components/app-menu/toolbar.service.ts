@@ -5,6 +5,7 @@ export interface Icon {
   id: string;
   icon: string;
   action: () => void;
+  isSearch?: boolean;
 }
 
 @Injectable({

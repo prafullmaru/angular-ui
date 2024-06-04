@@ -90,4 +90,14 @@ export class Screen1Component {
     a.click();
     window.URL.revokeObjectURL(url);
   }
+
+  clearForm() {
+    this.customerName = '';
+    this.selectedSourceProduct = '',
+    this.selectedSourceVersion = '',
+    this.selectedTargetProduct = '',
+    this.mappingGroupName = '',
+    this.sourceVersions = [];
+
+  }
 }
