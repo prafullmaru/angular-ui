@@ -14,9 +14,9 @@
             <!-- <span class="audible">Open App Menu</span> -->
           </ids-button>
         </ids-toolbar-section>
-        <ids-toolbar-section type="title">
-          <ids-text font-size="20" type="h1">{{ currentTitle }}</ids-text>
-        </ids-toolbar-section>
+       <ids-toolbar-section type="title">
+  <ids-text font-size="20" type="h1" [innerHTML]="currentTitle"></ids-text>
+</ids-toolbar-section>
 
         <ng-container *ngFor="let icon of icons">
           <ids-toolbar-section align="end" type="button">

@@ -27,7 +27,7 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
         this.router.navigate([`/${screen}`]);
         break;
       case 'screen2':
-        this.currentTitle = 'Customer Sites';
+        this.currentTitle = 'Customer<br> Inquiry';
         this.router.navigate([`/${screen}`]);
         break;
       // case 'new-customer':
