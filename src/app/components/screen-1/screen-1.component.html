@@ -1,52 +1,50 @@
 <!DOCTYPE html>
-<ids-container padding="8">
-  <!-- <ids-theme-switcher mode="light"></ids-theme-switcher> -->
-
-  <!-- <ids-layout-grid>
-    <ids-text font-size="12" type="h1">Customer New</ids-text>
-  </ids-layout-grid> -->
-  <ids-layout-grid auto-fit="false" padding="md">
-    <ids-layout-grid-cell>
-
-      <!-- Customer Name -->
-      <ids-input type="text" label="Customer Name" validate="required" [(ngModel)]="customerName" value=""></ids-input>
-
-      <!-- Source Product Dropdown -->
-      <!-- <div class="dropdown-group"> -->
-        <ids-dropdown id="sourceProductDropdown" label="Source Product" [(ngModel)]="selectedSourceProduct" (change)="setVersionsForSelectedSourceProduct($event)" validate="required">
-          <ids-list-box>
-            <ids-list-box-option id="fc" value="fc">Facts</ids-list-box-option>
-            <ids-list-box-option id="syt" value="syt">Syteline</ids-list-box-option>
-            <ids-list-box-option id="b4" value="b4">Baan4</ids-list-box-option>
-          </ids-list-box>
-        </ids-dropdown>
-        <!-- Source Version Dropdown -->
-        <ids-dropdown id="sourceVersionDropdown" label="Source Version" [(ngModel)]="selectedSourceVersion" (change)="setSelectedSourceVersion($event)" validate="required">
-          <ids-list-box>
-            <ids-list-box-option *ngFor="let sourceVersion of sourceVersions" [value]="sourceVersion">{{ sourceVersion }}</ids-list-box-option>
-          </ids-list-box>
-        </ids-dropdown>
-      <!-- </div> -->
-
-      <!-- Target Dropdown -->
-      <!-- <div class="dropdown-group"> -->
-        <ids-dropdown id="targetProductDropdown" label="Target Product" [(ngModel)]="selectedTargetProduct" (change)="setSelectedTargetProduct($event)" validate="required">
-          <ids-list-box>
-            <ids-list-box-option id="csi" value="csi">Cloud Suite Industrial (CSI)</ids-list-box-option>
-            <ids-list-box-option id="ln" value="ln">Infor LN</ids-list-box-option>
-            <ids-list-box-option id="csf" value="csf">CSF</ids-list-box-option>
-          </ids-list-box>
-        </ids-dropdown>
-
-        <!-- Mapping Group Name -->
-        <ids-input type="text" label="Mapping Group Name" readonly="true" [value]="mappingGroupName"></ids-input>
-      <!-- </div> -->
-
-      <!-- Save button -->
-      <ids-button id="submit" (click)="save()" appearance="primary">
-        <span>Save</span>
-      </ids-button>
-
-    </ids-layout-grid-cell>
-  </ids-layout-grid>
-</ids-container>
+<ids-form submit-button="btn-submit" id="sample-form">
+  <!-- <ids-expandable-area type="partial"> -->
+    <ids-layout-grid cols="1" cols-md="2" padding="md">
+        <ids-layout-grid-cell>
+            <!-- Customer Name -->
+            <ids-input type="text" label="Customer Name" validate="required" [(ngModel)]="customerName" value=""></ids-input>
+        </ids-layout-grid-cell>
+        <ids-layout-grid-cell></ids-layout-grid-cell>
+        <!-- Source Product Dropdown -->
+        <ids-layout-grid-cell>
+            <ids-dropdown id="sourceProductDropdown" label="Source Product" [(ngModel)]="selectedSourceProduct" (change)="setVersionsForSelectedSourceProduct($event)" validate="required">
+            <ids-list-box>
+                <ids-list-box-option id="fc" value="fc">Facts</ids-list-box-option>
+                <ids-list-box-option id="syt" value="syt">Syteline</ids-list-box-option>
+                <ids-list-box-option id="b4" value="b4">Baan4</ids-list-box-option>
+            </ids-list-box>
+            </ids-dropdown>
+            <!-- Target Product Dropdown -->
+            <ids-dropdown id="targetProductDropdown" label="Target Product" [(ngModel)]="selectedTargetProduct" (change)="setSelectedTargetProduct($event)" validate="required">
+            <ids-list-box>
+                <ids-list-box-option id="csi" value="csi">Cloud Suite Industrial (CSI)</ids-list-box-option>
+                <ids-list-box-option id="ln" value="ln">Infor LN</ids-list-box-option>
+                <ids-list-box-option id="csf" value="csf">CSF</ids-list-box-option>
+            </ids-list-box>
+            </ids-dropdown>
+        </ids-layout-grid-cell>
+        <ids-layout-grid-cell>
+            <!-- Source Version Dropdown -->
+            <ids-dropdown id="sourceVersionDropdown" label="Source Version" [(ngModel)]="selectedSourceVersion" (change)="setSelectedSourceVersion($event)" validate="required">
+            <ids-list-box>
+                <ids-list-box-option *ngFor="let sourceVersion of sourceVersions" [value]="sourceVersion">{{ sourceVersion }}</ids-list-box-option>
+            </ids-list-box>
+            </ids-dropdown>
+            <!-- Mapping Group Name -->
+            <ids-input type="text" label="Mapping Group Name" readonly="true" [value]="mappingGroupName"></ids-input>
+        </ids-layout-grid-cell>
+    </ids-layout-grid>
+    <ids-hyperlink slot="expander-default" hitbox="true">Show More</ids-hyperlink>
+          <ids-hyperlink slot="expander-expanded" hitbox="true">Show Less</ids-hyperlink>
+    <!-- Save button -->
+    <!-- <ids-layout-grid cols="1" cols-md="2" padding-x="md">
+        <ids-layout-grid-cell>
+            <ids-button id="btn-submit" appearance="primary" type="submit" (click)="save()">
+                <span>Submit</span>
+            </ids-button>
+        </ids-layout-grid-cell>
+    </ids-layout-grid> -->
+  <!-- </ids-expandable-area> -->
+</ids-form>

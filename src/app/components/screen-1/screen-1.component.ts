@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import 'ids-enterprise-wc/enterprise-wc.js';
 
 @Component({
@@ -7,6 +7,9 @@ import 'ids-enterprise-wc/enterprise-wc.js';
   styleUrls: ['./screen-1.component.scss']
 })
 export class Screen1Component {
+
+  @Output() saveEvent = new EventEmitter<void>();
+
   customerName: string = '';
   selectedSourceProduct: string = '';
   selectedSourceVersion: string = '';
@@ -72,7 +75,7 @@ export class Screen1Component {
     return productMap[productId] || '';
   }
 
-  save() {
+  saveForm() {
     const formData = {
       customerName: this.customerName,
       selectedSourceProduct: this.selectedSourceProduct,
@@ -81,14 +84,7 @@ export class Screen1Component {
       mappingGroupName: this.mappingGroupName
     };
 
-    const jsonStr = JSON.stringify(formData);
-    const blob = new Blob([jsonStr], { type: 'application/json' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'form-data.json';
-    a.click();
-    window.URL.revokeObjectURL(url);
+    console.log(formData)
   }
 
   clearForm() {

@@ -4,7 +4,6 @@ import 'ids-enterprise-wc/enterprise-wc.js';
 import { filter } from 'rxjs';
 import { Screen1Component } from '../screen-1/screen-1.component';
 import { Icon, ToolbarService } from './toolbar.service';
-
 @Component({
   selector: 'app-menu',
   templateUrl: './app-menu.component.html',
@@ -15,7 +14,11 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
 
   @ViewChild('appMenuDrawer', { read: ElementRef }) appMenuDrawer!: ElementRef<HTMLElement>;
   @ViewChild('appMenuTriggerBtn', { read: ElementRef }) appMenuTriggerBtn!: ElementRef<HTMLElement>;
-  @ViewChild(Screen1Component) screen1Component?: Screen1Component
+
+
+  screen1Ref!: Screen1Component
+
+
   public disabled: boolean = true;
   constructor(private router: Router, private toolbarService: ToolbarService) {}
 
@@ -111,6 +114,7 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
 
   save() {
     console.log('Save action triggered');
+    this.screen1Ref.saveForm();
   }
 
   cancel() {
