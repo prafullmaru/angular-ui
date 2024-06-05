@@ -7,6 +7,10 @@ import 'ids-enterprise-wc/enterprise-wc.js';
   styleUrls: ['./screen-1.component.scss']
 })
 export class Screen1Component {
+  static instance: Screen1Component;
+  constructor() {
+    Screen1Component.instance = this;
+  }
 
   @Output() saveEvent = new EventEmitter<void>();
 

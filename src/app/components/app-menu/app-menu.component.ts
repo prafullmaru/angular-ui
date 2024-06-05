@@ -15,10 +15,6 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
   @ViewChild('appMenuDrawer', { read: ElementRef }) appMenuDrawer!: ElementRef<HTMLElement>;
   @ViewChild('appMenuTriggerBtn', { read: ElementRef }) appMenuTriggerBtn!: ElementRef<HTMLElement>;
 
-
-  screen1Ref!: Screen1Component
-
-
   public disabled: boolean = true;
   constructor(private router: Router, private toolbarService: ToolbarService) {}
 
@@ -67,7 +63,7 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     (this.appMenuDrawer.nativeElement as any).target = this.appMenuTriggerBtn.nativeElement;
   }
-  
+
   disableTriggerButton() {
     this.disabled = true;
   }
@@ -114,13 +110,20 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
 
   save() {
     console.log('Save action triggered');
-    this.screen1Ref.saveForm();
+    if (Screen1Component.instance) {
+      Screen1Component.instance.saveForm();
+    } else {
+      console.error('Screen1Component not available');
+    }
   }
 
   cancel() {
     console.log('Cancel action triggered');
-    // this.screen1Component.clearForm();
-
+    if (Screen1Component.instance) {
+      Screen1Component.instance.clearForm();
+    } else {
+      console.error('Screen1Component not available');
+    }
   }
 
   bolt() {
