@@ -4,13 +4,13 @@
 
         <!-- Customer -->
         <ids-layout-grid-cell>
-            <ids-input size="md" id="customer" type="text" label="Customer" value=""></ids-input>
+            <ids-input size="md" id="customer" type="text" label="Customer" value="" validate="required"></ids-input>
         </ids-layout-grid-cell>
 
         <!-- Site Reference Required -->
         <ids-layout-grid-cell>
             <br />
-            <ids-checkbox label="Site Reference Required" checked="true"></ids-checkbox>
+            <ids-checkbox id="siteReferenceRequired" label="Site Reference Required" checked="true"></ids-checkbox>
         </ids-layout-grid-cell>
 
         <!-- Mapping Group Name -->
@@ -52,7 +52,7 @@
         <ids-layout-grid-cell>
             <br />
             <br />
-            <ids-button id="test-button-primary" appearance="primary" width="100px">
+            <ids-button id="load-btn-submit" appearance="primary" width="100px">
                 <span>Load</span>
             </ids-button>
         </ids-layout-grid-cell>

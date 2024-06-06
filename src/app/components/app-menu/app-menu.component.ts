@@ -2,14 +2,12 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { NavigationEnd, Router } from '@angular/router';
 import 'ids-enterprise-wc/enterprise-wc.js';
 import { CustomerNewComponent } from '../customer-new/customer-new.component';
-import { Icon } from './toolbar.service';
 @Component({
   selector: 'app-menu',
   templateUrl: './app-menu.component.html',
   styleUrls: ['./app-menu.component.scss']
 })
 export class AppMenuComponent implements OnInit, AfterViewInit {
-  icons: Icon[] = [];
 
   @ViewChild('appMenuDrawer', { read: ElementRef }) appMenuDrawer!: ElementRef<HTMLElement>;
   @ViewChild('appMenuTriggerBtn', { read: ElementRef }) appMenuTriggerBtn!: ElementRef<HTMLElement>;
