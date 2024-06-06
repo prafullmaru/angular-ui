@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import 'ids-enterprise-wc/enterprise-wc.js';
-import formDataJSON from "../../../../src/api/form-data.json";
+import formDataJSON from "../../../api/form-data.json";
 
 interface GridColumn {
   id: string;
@@ -17,11 +17,11 @@ interface GridColumn {
 }
 
 @Component({
-  selector: 'app-screen-2',
-  templateUrl: './screen-2.component.html',
-  styleUrls: ['./screen-2.component.scss']
+  selector: 'app-customer-inquiry',
+  templateUrl: './customer-inquiry.component.html',
+  styleUrls: ['./customer-inquiry.component.scss']
 })
-export class Screen2Component implements AfterViewInit {
+export class CustomerInquiryComponent implements AfterViewInit {
   @ViewChild('dataGrid', { read: ElementRef }) dataGrid!: ElementRef;
   public columns: GridColumn[] = [];
   public url: any = formDataJSON;

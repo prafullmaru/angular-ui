@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 import 'ids-enterprise-wc/enterprise-wc.js';
 
 @Component({
-  selector: 'app-screen-1',
-  templateUrl: './screen-1.component.html',
-  styleUrls: ['./screen-1.component.scss']
+  selector: 'app-customer-new',
+  templateUrl: './customer-new.component.html',
+  styleUrls: ['./customer-new.component.scss']
 })
-export class Screen1Component {
+export class CustomerNewComponent {
 
-  static instance: Screen1Component;
+  static instance: CustomerNewComponent;
   constructor() {
-    Screen1Component.instance = this;
+    CustomerNewComponent.instance = this;
   }
 
   ngAfterViewInit() {

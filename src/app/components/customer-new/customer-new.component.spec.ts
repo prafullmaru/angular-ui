@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Screen2Component } from './screen-2.component';
+import { CustomerNewComponent } from './customer-new.component';
 
-describe('Screen2Component', () => {
-  let component: Screen2Component;
-  let fixture: ComponentFixture<Screen2Component>;
+describe('CustomerNewComponent', () => {
+  let component: CustomerNewComponent;
+  let fixture: ComponentFixture<CustomerNewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [Screen2Component]
+      declarations: [CustomerNewComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(Screen2Component);
+    fixture = TestBed.createComponent(CustomerNewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

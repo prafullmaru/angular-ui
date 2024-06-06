@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import 'ids-enterprise-wc/enterprise-wc.js';
-import { Screen1Component } from '../screen-1/screen-1.component';
+import { CustomerNewComponent } from '../customer-new/customer-new.component';
 import { Icon } from './toolbar.service';
 @Component({
   selector: 'app-menu',
@@ -23,11 +23,11 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
 
   navigateTo(screen: string) {
     switch (screen) {
-      case 'screen1':
+      case 'customer-new':
         this.currentTitle = 'New Customer';
         this.router.navigate([`/${screen}`]);
         break;
-      case 'screen2':
+      case 'customer-inquiry':
         this.currentTitle = 'Customer<br> Inquiry';
         this.router.navigate([`/${screen}`]);
         break;
@@ -69,8 +69,8 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
 
   cancel() {
     console.log('Cancel action triggered');
-    if (Screen1Component.instance) {
-      Screen1Component.instance.clearForm();
+    if (CustomerNewComponent.instance) {
+      CustomerNewComponent.instance.clearForm();
     } else {
       console.error('Screen1Component not available');
     }

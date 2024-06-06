@@ -18,7 +18,7 @@
       </ids-toolbar-section>
       
       <!-- Icons for screen1 -->
-      <ng-container *ngIf="currentRoute === 'screen1'">
+      <ng-container *ngIf="currentRoute === 'customer-new'">
         <ids-toolbar-section align="end" type="button">
           <ids-button id="btn-submit" icon="save" type="submit"></ids-button>
         </ids-toolbar-section>
@@ -37,7 +37,7 @@
       </ng-container>
       
       <!-- Icons for screen2 -->
-      <ng-container *ngIf="currentRoute === 'screen2'">
+      <ng-container *ngIf="currentRoute === 'customer-inquiry'">
         <ids-toolbar-section align="end" type="input">
             <ids-search-field clearable color-variant="alternate" label-state="collapsed" id="header-search" no-margins placeholder="Type to Search"></ids-search-field>        </ids-toolbar-section>
         <ids-toolbar-section align="end" type="button">
@@ -91,12 +91,12 @@
             <ids-text font-size="14">Inquire</ids-text>
           </ids-accordion-header>
           <ids-accordion-panel slot="content">
-            <ids-accordion-header slot="header" (click)="navigateTo('screen1')">
+            <ids-accordion-header slot="header" (click)="navigateTo('customer-new')">
               <ids-text font-size="14">Customer</ids-text>
             </ids-accordion-header>
           </ids-accordion-panel>
           <ids-accordion-panel slot="content">
-            <ids-accordion-header slot="header" (click)="navigateTo('screen2')">
+            <ids-accordion-header slot="header" (click)="navigateTo('customer-inquiry')">
               <ids-text font-size="14">Customer Sites</ids-text>
             </ids-accordion-header>
           </ids-accordion-panel>
@@ -107,12 +107,12 @@
             <ids-text font-size="14">Setup</ids-text>
           </ids-accordion-header>
           <ids-accordion-panel slot="content">
-            <ids-accordion-header slot="header" (click)="navigateTo('screen1')">
+            <ids-accordion-header slot="header" (click)="navigateTo('customer-new')">
               <ids-text font-size="14">New Customer</ids-text>
             </ids-accordion-header>
           </ids-accordion-panel>
           <ids-accordion-panel slot="content">
-            <ids-accordion-header slot="header" (click)="navigateTo('screen2')">
+            <ids-accordion-header slot="header" (click)="navigateTo('customer-inquiry')">
               <ids-text font-size="14">Customer Sites</ids-text>
             </ids-accordion-header>
           </ids-accordion-panel>
