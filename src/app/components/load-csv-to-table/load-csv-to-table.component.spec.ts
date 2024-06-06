@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Screen3Component } from './screen-3.component';
+import { LoadCsvToTableComponent } from './load-csv-to-table.component';
 
-describe('Screen3Component', () => {
-  let component: Screen3Component;
-  let fixture: ComponentFixture<Screen3Component>;
+describe('LoadCsvToTableComponent', () => {
+  let component: LoadCsvToTableComponent;
+  let fixture: ComponentFixture<LoadCsvToTableComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Screen3Component]
+      declarations: [LoadCsvToTableComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(Screen3Component);
+    fixture = TestBed.createComponent(LoadCsvToTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

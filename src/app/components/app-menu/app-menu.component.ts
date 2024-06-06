@@ -31,6 +31,14 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
         this.currentTitle = 'Customer<br> Inquiry';
         this.router.navigate([`/${screen}`]);
         break;
+      case 'load-to-csi':
+        this.currentTitle = 'Extract, Transform, Load<br>Load Data Extracts';
+        this.router.navigate([`/${screen}`]);
+        break;
+      case 'load-csv-to-table':
+      this.currentTitle = 'Extract, Transform, Load<br>Import CSV File To Table';
+      this.router.navigate([`/${screen}`]);
+      break;
       // case 'new-customer':
       //   this.currentTitle = 'New Customer';
       //   this.router.navigate(['Screen1Component']);

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<ids-form submit-button="load-btn-submit" id="load-to-csi">
+    <ids-layout-grid cols="1" cols-md="2" padding="md">
+
+        <!-- Customer -->
+        <ids-layout-grid-cell>
+            <ids-input size="md" id="customer" type="text" label="Customer" value=""></ids-input>
+        </ids-layout-grid-cell>
+
+        <!-- Site Reference Required -->
+        <ids-layout-grid-cell>
+            <br />
+            <ids-checkbox label="Site Reference Required" checked="true"></ids-checkbox>
+        </ids-layout-grid-cell>
+
+        <!-- Mapping Group Name -->
+        <ids-layout-grid-cell>
+            <ids-dropdown id="mappingGroupName" label="Mapping Group Name" validate="required">
+                <ids-list-box>
+                    <ids-list-box-option id="fc" value="fc">ExtractFileToCSI</ids-list-box-option>
+                </ids-list-box>
+            </ids-dropdown>
+        <!-- Loader Type -->
+            <ids-dropdown id="loaderType" label="Loader Type" validate="required">
+                <ids-list-box>
+                    <ids-list-box-option id="csi_loader" value="csi">CSI_Loader</ids-list-box-option>
+                </ids-list-box>
+            </ids-dropdown>
+        </ids-layout-grid-cell>
+
+        <!-- Site Reference -->
+        <ids-layout-grid-cell>
+            <ids-dropdown id="siteReference" label="Site Reference" validate="required" >
+                <ids-list-box>
+                    <ids-list-box-option id="csi_abc_corp" value="csi">CSI_ABC_Corp</ids-list-box-option>
+                </ids-list-box>
+            </ids-dropdown>
+
+        <!-- Generated File Directory -->
+            <ids-input id="generatedFilesDirectory" type="text" label="Generated File Directory" readonly="true"></ids-input>
+        </ids-layout-grid-cell>
+
+        <ids-layout-grid-cell>
+            <!-- Extract File -->
+            <ids-trigger-field size="lg" label="Extract File">
+                <ids-trigger-button slot="trigger-end">
+                    <ids-icon icon="search-folder"></ids-icon>
+                </ids-trigger-button>
+            </ids-trigger-field>
+        </ids-layout-grid-cell>
+
+        <ids-layout-grid-cell>
+            <br />
+            <br />
+            <ids-button id="test-button-primary" appearance="primary" width="100px">
+                <span>Load</span>
+            </ids-button>
+        </ids-layout-grid-cell>
+    </ids-layout-grid>
+</ids-form>

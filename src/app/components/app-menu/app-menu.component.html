@@ -17,7 +17,7 @@
         <ids-text font-size="20" type="h1" [innerHTML]="currentTitle"></ids-text>
       </ids-toolbar-section>
       
-      <!-- Icons for screen1 -->
+      <!-- Icons for customer-new -->
       <ng-container *ngIf="currentRoute === 'customer-new'">
         <ids-toolbar-section align="end" type="button">
           <ids-button id="btn-submit" icon="save" type="submit"></ids-button>
@@ -36,7 +36,7 @@
         </ids-toolbar-section>
       </ng-container>
       
-      <!-- Icons for screen2 -->
+      <!-- Icons for customer-inquiry -->
       <ng-container *ngIf="currentRoute === 'customer-inquiry'">
         <ids-toolbar-section align="end" type="input">
             <ids-search-field clearable color-variant="alternate" label-state="collapsed" id="header-search" no-margins placeholder="Type to Search"></ids-search-field>        </ids-toolbar-section>
@@ -48,6 +48,13 @@
         </ids-toolbar-section>
         <ids-toolbar-section align="end" type="button">
           <ids-button id="copy" icon="copy" (click)="copy()"></ids-button>
+        </ids-toolbar-section>
+      </ng-container>
+
+      <!-- Icons for load-to-csi -->
+      <ng-container *ngIf="currentRoute === 'load-to-csi'">
+        <ids-toolbar-section align="end" type="button">
+          <ids-button id="load-cancel" icon="cancel" (click)="cancel()"></ids-button>
         </ids-toolbar-section>
       </ng-container>
       
@@ -149,6 +156,48 @@
         <ids-accordion-header slot="header" icon="cog">
           <ids-text font-size="16">Execute ETL</ids-text>
         </ids-accordion-header>
+        <!-- CSD -->
+        <ids-accordion-panel slot="content">
+          <ids-accordion-header slot="header">
+            <ids-text font-size="14">CSD</ids-text>
+          </ids-accordion-header>
+        </ids-accordion-panel>
+        <!-- CSI -->
+        <ids-accordion-panel slot="content">
+          <ids-accordion-header slot="header">
+            <ids-text font-size="14">CSI</ids-text>
+          </ids-accordion-header>
+          <!-- Load CSV To Table -->
+          <ids-accordion-panel slot="content">
+            <ids-accordion-header slot="header" (click)="navigateTo('load-csv-to-table')">
+              <ids-text font-size="14">Load CSV To Table</ids-text>
+            </ids-accordion-header>
+          </ids-accordion-panel>
+          <!-- Generate Extracts -->
+          <ids-accordion-panel slot="content">
+            <ids-accordion-header slot="header" (click)="navigateTo('customer-new')">
+              <ids-text font-size="14">Generate Extracts</ids-text>
+            </ids-accordion-header>
+          </ids-accordion-panel>
+          <!-- Load to CSI -->
+          <ids-accordion-panel slot="content">
+            <ids-accordion-header slot="header" (click)="navigateTo('load-to-csi')">
+              <ids-text font-size="14">Load to CSI</ids-text>
+            </ids-accordion-header>
+          </ids-accordion-panel>
+        </ids-accordion-panel>
+        <!-- M3 -->
+        <ids-accordion-panel slot="content">
+          <ids-accordion-header slot="header" (click)="navigateTo('customer-inquiry')">
+            <ids-text font-size="14">M3</ids-text>
+          </ids-accordion-header>
+        </ids-accordion-panel>
+        <!-- LN -->
+        <ids-accordion-panel slot="content">
+          <ids-accordion-header slot="header" (click)="navigateTo('customer-inquiry')">
+            <ids-text font-size="14">LN</ids-text>
+          </ids-accordion-header>
+        </ids-accordion-panel>
       </ids-accordion-panel>
     </ids-accordion>
     <!-- Review -->
