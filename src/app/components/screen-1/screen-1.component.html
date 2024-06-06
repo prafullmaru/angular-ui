@@ -4,7 +4,7 @@
     <ids-layout-grid cols="1" cols-md="2" padding="md">
         <ids-layout-grid-cell>
             <!-- Customer Name -->
-            <ids-input type="text" label="Customer Name" validate="required" [(ngModel)]="customerName" value=""></ids-input>
+            <ids-input id="customerName" type="text" label="Customer Name" dirty-tracker validate="required" [(ngModel)]="customerName" value=""></ids-input>
         </ids-layout-grid-cell>
         <ids-layout-grid-cell></ids-layout-grid-cell>
         <!-- Source Product Dropdown -->
@@ -33,7 +33,7 @@
             </ids-list-box>
             </ids-dropdown>
             <!-- Mapping Group Name -->
-            <ids-input type="text" label="Mapping Group Name" readonly="true" [value]="mappingGroupName"></ids-input>
+            <ids-input id="mappingGroupName" type="text" label="Mapping Group Name" readonly="true" [value]="mappingGroupName"></ids-input>
         </ids-layout-grid-cell>
     </ids-layout-grid>
     <ids-hyperlink slot="expander-default" hitbox="true">Show More</ids-hyperlink>

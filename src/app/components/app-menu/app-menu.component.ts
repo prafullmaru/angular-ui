@@ -1,9 +1,8 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import 'ids-enterprise-wc/enterprise-wc.js';
-import { filter } from 'rxjs';
 import { Screen1Component } from '../screen-1/screen-1.component';
-import { Icon, ToolbarService } from './toolbar.service';
+import { Icon } from './toolbar.service';
 @Component({
   selector: 'app-menu',
   templateUrl: './app-menu.component.html',
@@ -16,9 +15,10 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
   @ViewChild('appMenuTriggerBtn', { read: ElementRef }) appMenuTriggerBtn!: ElementRef<HTMLElement>;
 
   public disabled: boolean = true;
-  constructor(private router: Router, private toolbarService: ToolbarService) {}
+  constructor(private router: Router) {}
 
   currentTitle = 'Welcome! ';
+  currentRoute!: string;
 
 
   navigateTo(screen: string) {
@@ -41,22 +41,10 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    console.log('App Menu initialized');
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => {
-      const route = this.router.routerState.snapshot.root.firstChild;
-      if (route && route.data['icons']) {
-        this.updateIcons(route.data['icons']);
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.currentRoute = event.urlAfterRedirects.split('/')[1];
       }
-    });
-
-    this.toolbarService.currentIcons.subscribe(iconIds => {
-      this.icons = iconIds.map(id => ({
-        id,
-        icon: id,
-        action: this.getActionForIcon(id)
-      }));
     });
   }
 
@@ -78,44 +66,6 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
 
   }
 
-  updateIcons(iconIds: string[]) {
-    this.icons = iconIds.map(id => ({
-      id,
-      icon: id,
-      action: this.getActionForIcon(id),
-      isSearch: id === 'search'
-    }));
-  }
-
-  getActionForIcon(icon: string): () => void {
-    switch (icon) {
-      case 'save':
-        return this.save.bind(this);
-      case 'cancel':
-        return this.cancel.bind(this);
-      case 'bolt':
-        return this.bolt.bind(this);
-      case 'rejected-outline':
-        return this.rejectedOutline.bind(this);
-      case 'edit':
-        return this.edit.bind(this);
-      case 'add':
-        return this.add.bind(this);
-      case 'copy':
-        return this.copy.bind(this);
-      default:
-        return () => { console.log(`No action defined for ${icon}`); };
-    }
-  }
-
-  save() {
-    console.log('Save action triggered');
-    if (Screen1Component.instance) {
-      Screen1Component.instance.saveForm();
-    } else {
-      console.error('Screen1Component not available');
-    }
-  }
 
   cancel() {
     console.log('Cancel action triggered');
@@ -144,5 +94,6 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
   copy() {
     console.log('Copy action is triggered')
   }
- 
+  search() {}
+  filter() {}
 }

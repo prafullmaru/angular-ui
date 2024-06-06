@@ -1,145 +1,170 @@
 <!DOCTYPE html>
-<ids-container role="main" padding="0" hidden>
   <!-- <ids-theme-switcher mode="light"></ids-theme-switcher> -->
-    <!-- Page Header -->
-    <ids-header>
-        <ids-toolbar>
-            <ids-toolbar-section type="button">
-                <ids-button
-                #appMenuTriggerBtn 
-                id="app-menu-trigger" 
-                icon="menu" 
-                (click)="disableTriggerButton()"
-                >
-                <!-- <span class="audible">Open App Menu</span> -->
-                </ids-button> 
-            </ids-toolbar-section>
-            <ids-toolbar-section type="title">
-                <ids-text font-size="20" type="h1" [innerHTML]="currentTitle"></ids-text>
-            </ids-toolbar-section>
-            <ng-container *ngFor="let icon of icons">
-                <ids-toolbar-section align="end" type="button" *ngIf="!icon.isSearch">
-                    <ids-button [id]="icon.id" [icon]="icon.icon" (click)="icon.action()"></ids-button>
-                </ids-toolbar-section>
-                <ids-toolbar-section align="end" type="input" *ngIf="icon.isSearch">
-                    <ids-search-field clearable color-variant="alternate" label-state="collapsed" id="header-search" no-margins placeholder="Type to Search"></ids-search-field>
-                </ids-toolbar-section>
-            </ng-container>
-            <!--Icon-user-profile-->
-            <ids-toolbar-section align="end" type="button">
-                <ids-button id="user-profile" icon="user-profile"></ids-button>
-            </ids-toolbar-section>
-            <!--Theme Switcher-->        
-            <ids-toolbar-section align="end" type="button">
-                <ids-theme-switcher mode="light"></ids-theme-switcher>
-            </ids-toolbar-section>
-        </ids-toolbar>
-    </ids-header>
-
-      <router-outlet></router-outlet>
+  <!-- Page Header -->
+  <ids-header>
+    <ids-toolbar>
+      <ids-toolbar-section type="button">
+        <ids-button
+          #appMenuTriggerBtn
+          id="app-menu-trigger"
+          icon="menu"
+          (click)="disableTriggerButton()"
+        >
+          <!-- <span class="audible">Open App Menu</span> -->
+        </ids-button>
+      </ids-toolbar-section>
+      <ids-toolbar-section type="title">
+        <ids-text font-size="20" type="h1" [innerHTML]="currentTitle"></ids-text>
+      </ids-toolbar-section>
       
-    <ids-app-menu
-    #appMenuDrawer 
+      <!-- Icons for screen1 -->
+      <ng-container *ngIf="currentRoute === 'screen1'">
+        <ids-toolbar-section align="end" type="button">
+          <ids-button id="btn-submit" icon="save" type="submit"></ids-button>
+        </ids-toolbar-section>
+        <ids-toolbar-section align="end" type="button">
+          <ids-button id="cancel" icon="cancel" (click)="cancel()"></ids-button>
+        </ids-toolbar-section>
+        <ids-toolbar-section align="end" type="button">
+          <ids-button id="rejected-outline" icon="rejected-outline" (click)="rejectedOutline()"></ids-button>
+        </ids-toolbar-section>
+        <ids-toolbar-section align="end" type="button">
+          <ids-button id="bolt" icon="bolt" (click)="bolt()"></ids-button>
+        </ids-toolbar-section>
+        <ids-toolbar-section align="end" type="button">
+          <ids-button id="filter" icon="filter" (click)="filter()"></ids-button>
+        </ids-toolbar-section>
+      </ng-container>
+      
+      <!-- Icons for screen2 -->
+      <ng-container *ngIf="currentRoute === 'screen2'">
+        <ids-toolbar-section align="end" type="input">
+            <ids-search-field clearable color-variant="alternate" label-state="collapsed" id="header-search" no-margins placeholder="Type to Search"></ids-search-field>        </ids-toolbar-section>
+        <ids-toolbar-section align="end" type="button">
+          <ids-button id="edit" icon="edit" (click)="edit()"></ids-button>
+        </ids-toolbar-section>
+        <ids-toolbar-section align="end" type="button">
+          <ids-button id="add" icon="add" (click)="add()"></ids-button>
+        </ids-toolbar-section>
+        <ids-toolbar-section align="end" type="button">
+          <ids-button id="copy" icon="copy" (click)="copy()"></ids-button>
+        </ids-toolbar-section>
+      </ng-container>
+      
+      <!-- Icon-user-profile -->
+      <ids-toolbar-section align="end" type="button">
+        <ids-button id="user-profile" icon="user-profile"></ids-button>
+      </ids-toolbar-section>
+      <!-- Theme Switcher -->
+      <ids-toolbar-section align="end" type="button">
+        <ids-theme-switcher mode="light"></ids-theme-switcher>
+      </ids-toolbar-section>
+    </ids-toolbar>
+  </ids-header>
+
+  <router-outlet></router-outlet>
+
+  <ids-app-menu
+    #appMenuDrawer
     id="app-menu"
     (hide)="enableTriggerButton()"
-    >
-    <ids-search-field 
-        id="search" 
-        clearable
-        label="Application Menu Search" 
-        color-variant="app-menu" 
-        label-state="collapsed" 
-        no-margins="true"
-        slot="search"
-        ></ids-search-field>
+  >
+    <ids-search-field
+      id="search"
+      clearable
+      label="Application Menu Search"
+      color-variant="app-menu"
+      label-state="collapsed"
+      no-margins="true"
+      slot="search"
+    ></ids-search-field>
     <!-- Main Content (Accordion Navigation) -->
     <ids-accordion>
-        <ids-accordion-panel>
-            <!-- Customer -->
-            <ids-accordion-header slot="header" icon="user-profile">
-                <ids-text font-size="16">Customer</ids-text>
+      <ids-accordion-panel>
+        <!-- Customer -->
+        <ids-accordion-header slot="header" icon="user-profile">
+          <ids-text font-size="16">Customer</ids-text>
+        </ids-accordion-header>
+        <!-- Inquire -->
+        <ids-accordion-panel slot="content">
+          <ids-accordion-header slot="header">
+            <ids-text font-size="14">Inquire</ids-text>
+          </ids-accordion-header>
+          <ids-accordion-panel slot="content">
+            <ids-accordion-header slot="header" (click)="navigateTo('screen1')">
+              <ids-text font-size="14">Customer</ids-text>
             </ids-accordion-header>
-            <!--Inquire-->
-            <ids-accordion-panel slot="content">
-                <ids-accordion-header slot="header">
-                    <ids-text font-size="14">Inquire</ids-text>
-                </ids-accordion-header>
-                <ids-accordion-panel slot="content">
-                    <ids-accordion-header slot="header" (click)="navigateTo('screen1')">
-                        <ids-text font-size="14">Customer</ids-text>
-                    </ids-accordion-header>
-                </ids-accordion-panel>
-                <ids-accordion-panel slot="content">
-                    <ids-accordion-header slot="header" (click)="navigateTo('screen2')">
-                        <ids-text font-size="14">Customer Sites</ids-text>
-                    </ids-accordion-header>
-                </ids-accordion-panel>
-            </ids-accordion-panel>
-            <!--Setup-->
-            <ids-accordion-panel slot="content">
-                <ids-accordion-header slot="header">
-                    <ids-text font-size="14">Setup</ids-text>
-                </ids-accordion-header>
-                <ids-accordion-panel slot="content">
-                    <ids-accordion-header slot="header" (click)="navigateTo('screen1')">
-                        <ids-text font-size="14">New Customer</ids-text>
-                    </ids-accordion-header>
-                </ids-accordion-panel>
-                <ids-accordion-panel slot="content">
-                    <ids-accordion-header slot="header" (click)="navigateTo('screen2')">
-                        <ids-text font-size="14">Customer Sites</ids-text>
-                    </ids-accordion-header>
-                </ids-accordion-panel>
-            </ids-accordion-panel>
+          </ids-accordion-panel>
+          <ids-accordion-panel slot="content">
+            <ids-accordion-header slot="header" (click)="navigateTo('screen2')">
+              <ids-text font-size="14">Customer Sites</ids-text>
+            </ids-accordion-header>
+          </ids-accordion-panel>
         </ids-accordion-panel>
+        <!-- Setup -->
+        <ids-accordion-panel slot="content">
+          <ids-accordion-header slot="header">
+            <ids-text font-size="14">Setup</ids-text>
+          </ids-accordion-header>
+          <ids-accordion-panel slot="content">
+            <ids-accordion-header slot="header" (click)="navigateTo('screen1')">
+              <ids-text font-size="14">New Customer</ids-text>
+            </ids-accordion-header>
+          </ids-accordion-panel>
+          <ids-accordion-panel slot="content">
+            <ids-accordion-header slot="header" (click)="navigateTo('screen2')">
+              <ids-text font-size="14">Customer Sites</ids-text>
+            </ids-accordion-header>
+          </ids-accordion-panel>
+        </ids-accordion-panel>
+      </ids-accordion-panel>
     </ids-accordion>
     <!-- Configuration -->
     <ids-accordion>
-        <ids-accordion-panel>
-            <ids-accordion-header slot="header" icon="settings">
-                <ids-text font-size="16">Configuration</ids-text>
-            </ids-accordion-header>
-        </ids-accordion-panel>
+      <ids-accordion-panel>
+        <ids-accordion-header slot="header" icon="settings">
+          <ids-text font-size="16">Configuration</ids-text>
+        </ids-accordion-header>
+      </ids-accordion-panel>
     </ids-accordion>
     <!-- Load Global Data -->
     <ids-accordion>
-        <ids-accordion-panel>
-            <ids-accordion-header slot="header" icon="upload">
-                <ids-text font-size="16">Load Global Data</ids-text>
-            </ids-accordion-header>
-        </ids-accordion-panel>
+      <ids-accordion-panel>
+        <ids-accordion-header slot="header" icon="upload">
+          <ids-text font-size="16">Load Global Data</ids-text>
+        </ids-accordion-header>
+      </ids-accordion-panel>
     </ids-accordion>
     <!-- Pre-Check -->
     <ids-accordion>
-        <ids-accordion-panel>
-            <ids-accordion-header slot="header" icon="drill-alt">
-                <ids-text font-size="16">Pre-Check</ids-text>
-            </ids-accordion-header>
-        </ids-accordion-panel>
+      <ids-accordion-panel>
+        <ids-accordion-header slot="header" icon="drill-alt">
+          <ids-text font-size="16">Pre-Check</ids-text>
+        </ids-accordion-header>
+      </ids-accordion-panel>
     </ids-accordion>
     <!-- Execute ETL -->
     <ids-accordion>
-        <ids-accordion-panel>
-            <ids-accordion-header slot="header" icon="cog">
-                <ids-text font-size="16">Execute ETL</ids-text>
-            </ids-accordion-header>
-        </ids-accordion-panel>
+      <ids-accordion-panel>
+        <ids-accordion-header slot="header" icon="cog">
+          <ids-text font-size="16">Execute ETL</ids-text>
+        </ids-accordion-header>
+      </ids-accordion-panel>
     </ids-accordion>
     <!-- Review -->
     <ids-accordion>
-        <ids-accordion-panel>
-            <ids-accordion-header slot="header" icon="advance-search">
-                <ids-text font-size="16">Review</ids-text>
-            </ids-accordion-header>
-        </ids-accordion-panel>
+      <ids-accordion-panel>
+        <ids-accordion-header slot="header" icon="advance-search">
+          <ids-text font-size="16">Review</ids-text>
+        </ids-accordion-header>
+      </ids-accordion-panel>
     </ids-accordion>
     <!-- Administration -->
     <ids-accordion>
-        <ids-accordion-panel>
-            <ids-accordion-header slot="header" icon="settings">
-                <ids-text font-size="16">Administration</ids-text>
-            </ids-accordion-header>
-        </ids-accordion-panel>
+      <ids-accordion-panel>
+        <ids-accordion-header slot="header" icon="settings">
+          <ids-text font-size="16">Administration</ids-text>
+        </ids-accordion-header>
+      </ids-accordion-panel>
     </ids-accordion>
-    </ids-app-menu>
-</ids-container>
+  </ids-app-menu>

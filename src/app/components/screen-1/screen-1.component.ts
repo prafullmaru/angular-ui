@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import 'ids-enterprise-wc/enterprise-wc.js';
 
 @Component({
@@ -7,12 +7,39 @@ import 'ids-enterprise-wc/enterprise-wc.js';
   styleUrls: ['./screen-1.component.scss']
 })
 export class Screen1Component {
+
   static instance: Screen1Component;
   constructor() {
     Screen1Component.instance = this;
   }
 
-  @Output() saveEvent = new EventEmitter<void>();
+  ngAfterViewInit() {
+    const form = document.querySelector('#sample-form') as any;
+    const submitButton = document.querySelector('#btn-submit') as any;
+
+    form?.addEventListener('submit', (e: Event) => {
+      e.preventDefault();
+      form.checkValidation();
+      if (form.isValid) {
+        console.info('Form Submitted', {
+          customerName: form.querySelector('#customerName').value,
+          selectedSourceProduct: form.querySelector('#sourceProductDropdown').value,
+          selectedTargetProduct: form.querySelector('#targetProductDropdown').value,
+          selectedSourceVersion: form.querySelector('#sourceVersionDropdown').value,
+          mappingGroupName: form.querySelector('#mappingGroupName').value
+        });
+      } else {
+        console.error('Form is invalid');
+      }
+    });
+
+    submitButton?.addEventListener('click', () => {
+      form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+    });
+  }
+
+
+
 
   customerName: string = '';
   selectedSourceProduct: string = '';
@@ -79,25 +106,8 @@ export class Screen1Component {
     return productMap[productId] || '';
   }
 
-  saveForm() {
-    const formData = {
-      customerName: this.customerName,
-      selectedSourceProduct: this.selectedSourceProduct,
-      selectedSourceVersion: this.selectedSourceVersion,
-      selectedTargetProduct: this.selectedTargetProduct,
-      mappingGroupName: this.mappingGroupName
-    };
-
-    console.log(formData)
-  }
-
   clearForm() {
-    this.customerName = '';
-    this.selectedSourceProduct = '',
-    this.selectedSourceVersion = '',
-    this.selectedTargetProduct = '',
-    this.mappingGroupName = '',
-    this.sourceVersions = [];
-
+    const form = document.querySelector('#sample-form') as any;
+    form.querySelector('#sourceProductDropdown').value=''
   }
 }
