@@ -47,13 +47,51 @@ export class CustomerNewComponent {
       e.preventDefault();
       form.checkValidation();
       if (form.isValid) {
-        console.info('Form Submitted', {
-          customerName: form.querySelector('#customerName').value,
-          selectedSourceProduct: form.querySelector('#sourceProductDropdown').value,
-          selectedTargetProduct: form.querySelector('#targetProductDropdown').value,
-          selectedSourceVersion: form.querySelector('#sourceVersionDropdown').value,
-          mappingGroupName: form.querySelector('#mappingGroupName').value
-        });
+        this.submitForm(
+          [
+            {
+              "requestID": "null",
+              "loaderName": "NewCustomer",
+              "paramName": "CustomerName",
+              "paramValue": form.querySelector('#customerName').value,
+              "variablename": "null",
+              "skipValue": "null",
+              "primaryMapCode": "null",
+              "secondaryMapCode": "null"
+            },
+            {
+              "requestID": "null",
+              "loaderName": "NewCustomer",
+              "paramName": "LS_SRC_PREFIX",
+              "paramValue":  form.querySelector('#linkedServer').value,
+              "variablename": "null",
+              "skipValue": "null",
+              "primaryMapCode": "null",
+              "secondaryMapCode": "null"
+            },
+            {
+              "requestID": "null",
+              "loaderName": "NewCustomer",
+              "paramName": "MapGroupName",
+              "paramValue": form.querySelector('#mappingGroupName').value,
+              "variablename": "test",
+              "skipValue": "null",
+              "primaryMapCode": "null",
+              "secondaryMapCode": "null"
+            },
+            {
+              "requestID": "null",
+              "loaderName": "NewCustomer",
+              "paramName": "SRC_PREFIX",
+              "paramValue": form.querySelector('#sourceDatabase').value,
+              "variablename": "null",
+              "skipValue": "null",
+              "primaryMapCode": "null",
+              "secondaryMapCode": "null"
+            }
+          ]
+      
+      );
       } else {
         console.error('Form is invalid');
       }
@@ -64,8 +102,20 @@ export class CustomerNewComponent {
     });
   }
 
+  submitForm(formData: any) {
+    this.http.post('http://54.163.252.133:8080/api/v1/elParamsList', formData).subscribe({
+      next: (response) => {
+        console.info('Form Submitted', response);
+      },
+      error: (error) => {
+        console.error('Error submitting form', error);
+      }
+    });
+  }
+
   fetchProducts() {
-    this.http.get<MapGroup[]>('http://54.163.252.133:8080/api/v1/mapGroups').subscribe({
+    this.http.get<MapGroup[]>('http://54.163.252.133:8080/api/v1/mapGroups').subscribe(
+      {
       next: (data: MapGroup[]) => {
         console.log('API Response:', data);
         this.processResponse(data);

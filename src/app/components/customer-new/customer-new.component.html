@@ -18,7 +18,9 @@
                 <ids-list-box>
                   <ids-list-box-option *ngFor="let product of targetProducts" [value]="product.name">{{ product.name }}</ids-list-box-option>
                 </ids-list-box>
-              </ids-dropdown>              
+              </ids-dropdown>
+              <br><br>
+            
         </ids-layout-grid-cell>
         <ids-layout-grid-cell>
             <!-- Source Version Dropdown -->
@@ -30,5 +32,21 @@
             <!-- Mapping Group Name -->
             <ids-input id="mappingGroupName" type="text" label="Mapping Group Name" readonly="true" [value]="mappingGroupName"></ids-input>
         </ids-layout-grid-cell>
+
+    <ids-layout-grid>
+        <!-- Connection Details -->        
+        <ids-text font-size="20">Connection Details</ids-text>
+        <!-- Source Database -->
+        <ids-input id="sourceDatabase" type="text" label="Source Database" value="" ></ids-input>
+    </ids-layout-grid>
+    <ids-layout-grid>
+        <!-- Linked Server -->
+        <br>
+        <ids-input id="linkedServer" type="text" label="Linked Server" value="" ></ids-input>
+
+    </ids-layout-grid>
+
+
+
     </ids-layout-grid>
 </ids-form>
