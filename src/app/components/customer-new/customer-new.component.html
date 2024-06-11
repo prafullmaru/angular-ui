@@ -6,47 +6,45 @@
             <ids-input id="customerName" type="text" label="Customer Name" dirty-tracker validate="required" [(ngModel)]="customerName" value=""></ids-input>
         </ids-layout-grid-cell>
         <ids-layout-grid-cell></ids-layout-grid-cell>
-        <!-- Source Product Dropdown -->
         <ids-layout-grid-cell>
+            <!-- Source Product Dropdown -->
             <ids-dropdown id="sourceProductDropdown" label="Source Product" [(ngModel)]="selectedSourceProduct" (change)="setVersionsForSelectedSourceProduct($event)" validate="required">
                 <ids-list-box>
-                  <ids-list-box-option *ngFor="let product of sourceProducts" [value]="product.name">{{ product.name }}</ids-list-box-option>
+                    <ids-list-box-option *ngFor="let product of sourceProducts" [value]="product.name">{{ product.name }}</ids-list-box-option>
                 </ids-list-box>
-              </ids-dropdown>
+            </ids-dropdown>
             <!-- Target Product Dropdown -->
             <ids-dropdown id="targetProductDropdown" label="Target Product" [(ngModel)]="selectedTargetProduct" (change)="setSelectedTargetProduct($event)" validate="required">
                 <ids-list-box>
-                  <ids-list-box-option *ngFor="let product of targetProducts" [value]="product.name">{{ product.name }}</ids-list-box-option>
+                    <ids-list-box-option *ngFor="let product of targetProducts" [value]="product.name">{{ product.name }}</ids-list-box-option>
                 </ids-list-box>
-              </ids-dropdown>
-              <br><br>
-            
+            </ids-dropdown>
+            <br />
+            <br />
         </ids-layout-grid-cell>
         <ids-layout-grid-cell>
             <!-- Source Version Dropdown -->
             <ids-dropdown id="sourceVersionDropdown" label="Source Version" [(ngModel)]="selectedSourceVersion" (change)="setSelectedSourceVersion($event)" validate="required">
                 <ids-list-box>
-                  <ids-list-box-option *ngFor="let version of sourceVersions" [value]="version">{{ version }}</ids-list-box-option>
+                    <ids-list-box-option *ngFor="let version of sourceVersions" [value]="version">{{ version }}</ids-list-box-option>
                 </ids-list-box>
-              </ids-dropdown>
+            </ids-dropdown>
             <!-- Mapping Group Name -->
             <ids-input id="mappingGroupName" type="text" label="Mapping Group Name" readonly="true" [value]="mappingGroupName"></ids-input>
         </ids-layout-grid-cell>
 
-    <ids-layout-grid>
-        <!-- Connection Details -->        
-        <ids-text font-size="20">Connection Details</ids-text>
-        <!-- Source Database -->
-        <ids-input id="sourceDatabase" type="text" label="Source Database" value="" ></ids-input>
-    </ids-layout-grid>
-    <ids-layout-grid>
-        <!-- Linked Server -->
-        <br>
-        <ids-input id="linkedServer" type="text" label="Linked Server" value="" ></ids-input>
-
-    </ids-layout-grid>
-
-
-
+        <ids-layout-grid>
+            <!-- Connection Details -->
+            <ids-text font-size="20">Connection Details</ids-text>
+        </ids-layout-grid>
+        <ids-layout-grid> </ids-layout-grid>
+        <ids-layout-grid>
+            <!-- Source Database -->
+            <ids-input id="sourceDatabase" type="text" label="Source Database" value=""></ids-input>
+        </ids-layout-grid>
+        <ids-layout-grid>
+            <!-- Linked Server -->
+            <ids-input id="linkedServer" type="text" label="Linked Server" value=""></ids-input>
+        </ids-layout-grid>
     </ids-layout-grid>
 </ids-form>
