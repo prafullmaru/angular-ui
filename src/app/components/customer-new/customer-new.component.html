@@ -16,7 +16,7 @@
             <!-- Target Product Dropdown -->
             <ids-dropdown id="targetProductDropdown" label="Target Product" [(ngModel)]="selectedTargetProduct" (change)="setSelectedTargetProduct($event)" validate="required">
                 <ids-list-box>
-                    <ids-list-box-option *ngFor="let product of targetProducts" [value]="product.name">{{ product.name }}</ids-list-box-option>
+                    <ids-list-box-option *ngFor="let product of targetProducts" [value]="product">{{ product }}</ids-list-box-option>
                 </ids-list-box>
             </ids-dropdown>
             <br />
@@ -35,7 +35,7 @@
 
         <ids-layout-grid>
             <!-- Connection Details -->
-            <ids-text font-size="20">Connection Details</ids-text>
+            <ids-text font-size="20"><u>Connection Details</u></ids-text>
         </ids-layout-grid>
         <ids-layout-grid> </ids-layout-grid>
         <ids-layout-grid>
@@ -47,4 +47,6 @@
             <ids-input id="linkedServer" type="text" label="Linked Server" value=""></ids-input>
         </ids-layout-grid>
     </ids-layout-grid>
+
+    
 </ids-form>

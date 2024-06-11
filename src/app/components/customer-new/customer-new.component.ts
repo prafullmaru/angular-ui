@@ -31,6 +31,8 @@ export class CustomerNewComponent {
 
   sourceProducts: any[] = [];
   targetProducts: any[] = [];
+  allMapGroups: MapGroup[] = [];
+
   constructor(private http: HttpClient) {
     CustomerNewComponent.instance = this;
   }
@@ -73,7 +75,7 @@ export class CustomerNewComponent {
               "requestID": "null",
               "loaderName": "NewCustomer",
               "paramName": "MapGroupName",
-              "paramValue": form.querySelector('#mappingGroupName').value,
+              "paramValue": this.mappingGroupName,
               "variablename": "test",
               "skipValue": "null",
               "primaryMapCode": "null",
@@ -90,8 +92,8 @@ export class CustomerNewComponent {
               "secondaryMapCode": "null"
             }
           ]
-      
-      );
+
+        );
       } else {
         console.error('Form is invalid');
       }
@@ -128,22 +130,32 @@ export class CustomerNewComponent {
 
   processResponse(data: MapGroup[]) {
     const sourceProductsMap = new Map<string, Set<string>>();
-    const targetProductsSet = new Set<string>();
+    const targetProductsMap = new Map<string, Set<string>>();
+
+    this.allMapGroups = data;
 
     data.forEach((item: MapGroup) => {
       if (!sourceProductsMap.has(item.sourceProduct)) {
         sourceProductsMap.set(item.sourceProduct, new Set<string>());
       }
       sourceProductsMap.get(item.sourceProduct)!.add(item.sourceProductVersion || '');
-      targetProductsSet.add(item.targetProduct);
+
+      if (!targetProductsMap.has(item.sourceProduct)) {
+        targetProductsMap.set(item.sourceProduct, new Set<string>());
+      }
+      targetProductsMap.get(item.sourceProduct)!.add(item.targetProduct);
     });
+
     this.sourceProducts = Array.from(sourceProductsMap.keys()).map(product => ({
       name: product,
       versions: Array.from(sourceProductsMap.get(product)!)
     }));
-    this.targetProducts = Array.from(targetProductsSet).map(product => ({ name: product }));
-  }
 
+    this.targetProducts = Array.from(targetProductsMap.keys()).map(product => ({
+      name: product,
+      targets: Array.from(targetProductsMap.get(product)!)
+    }));
+  }
 
   setVersionsForSelectedSourceProduct(event: Event) {
     const selectedSourceValue = (event.target as HTMLSelectElement).value;
@@ -152,8 +164,15 @@ export class CustomerNewComponent {
     const selectedProduct = this.sourceProducts.find(product => product.name === selectedSourceValue);
     this.sourceVersions = selectedProduct ? selectedProduct.versions : [];
 
+    this.targetProducts = this.allMapGroups
+      .filter(item => item.sourceProduct === selectedSourceValue)
+      .map(item => item.targetProduct)
+      .filter((value, index, self) => self.indexOf(value) === index);
+
     console.log('Available Versions:', this.sourceVersions);
+    console.log('Available Target Products:', this.targetProducts);
     this.selectedSourceVersion = '';
+    this.selectedTargetProduct = '';
     this.updateMappingGroupName();
   }
 
@@ -172,17 +191,16 @@ export class CustomerNewComponent {
   }
 
   updateMappingGroupName() {
-    console.log('Selected Source Product:', this.selectedSourceProduct);
-    console.log('Selected Source Version:', this.selectedSourceVersion);
-    console.log('Selected Target Product:', this.selectedTargetProduct);
+    this.mappingGroupName = this.getMappingGroupName();
+  }
 
-    if (this.selectedSourceProduct && this.selectedSourceVersion && this.selectedTargetProduct) {
-      const sourceText = this.getSourceProductName(this.selectedSourceProduct);
-      this.mappingGroupName = `${sourceText}(${this.selectedSourceVersion})To${this.getTargetProductName(this.selectedTargetProduct)}`;
-    } else {
-      this.mappingGroupName = '';
-    }
-    console.log('Mapping Group Name:', this.mappingGroupName);
+  getMappingGroupName(): string {
+    const selectedMapGroup = this.allMapGroups.find(group => 
+      group.sourceProduct === this.selectedSourceProduct &&
+      group.sourceProductVersion === this.selectedSourceVersion &&
+      group.targetProduct === this.selectedTargetProduct
+    );
+    return selectedMapGroup ? selectedMapGroup.mapGroupName : '';
   }
 
   getSourceProductName(productId: string): string {
