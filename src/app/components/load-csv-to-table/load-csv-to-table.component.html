@@ -1,1 +1,81 @@
-<p>load-csv-to-table works!</p>
+<!DOCTYPE html>
+<ids-form submit-button="load-btn-submit" id="load-csv-to-table">
+    <ids-layout-grid cols="2" cols-md="2" padding="md">
+        <ids-layout-grid-cell>
+            <!-- Customer -->
+            <ids-input size="md" id="customer" type="text" label="Customer" value="" validate="required"></ids-input>
+        </ids-layout-grid-cell>
+        <ids-layout-grid-cell>
+            <!-- Site Reference Required -->
+            <br /> <br />
+            <ids-checkbox id="siteReferenceRequired" label="Site Reference Required" checked="true"></ids-checkbox>
+            <br /> <br />
+        </ids-layout-grid-cell>
+
+        <ids-layout-grid-cell>
+            <!-- Mapping Group Name -->
+            <ids-dropdown id="mappingGroupName" label="Mapping Group Name" validate="required">
+                <ids-list-box>
+                    <ids-list-box-option id="fc" value="ExtractFileToCSI">ExtractFileToCSI</ids-list-box-option>
+                </ids-list-box>
+            </ids-dropdown>
+
+            <!-- Loader Type -->
+            <ids-dropdown id="loaderType" label="Loader Type" validate="required">
+                <ids-list-box>
+                    <ids-list-box-option id="csi_loader" value="CSVToTable_Loader">CSVToTable_Loader</ids-list-box-option>
+                </ids-list-box>
+            </ids-dropdown>
+
+            <!-- Source File Type -->
+            <ids-dropdown id="sourceFileType" label="Source File Type" validate="required">
+                <ids-list-box>
+                    <ids-list-box-option id="sourceFileTypeBox" value="E">E</ids-list-box-option>
+                </ids-list-box>
+            </ids-dropdown>
+
+            <!-- Target File Type -->
+            <ids-dropdown id="targetFileType" label="Target File Type" validate="required">
+                <ids-list-box>
+                    <ids-list-box-option id="targetFileTypeBox" value="E">E</ids-list-box-option>
+                </ids-list-box>
+            </ids-dropdown>
+
+            <!-- Load -->
+            <br /> <br />
+            <ids-button id="load-btn-submit" appearance="primary" width="100px">
+                <span>Import</span>
+            </ids-button>
+        </ids-layout-grid-cell>
+
+        <ids-layout-grid-cell>
+            <!-- Site Reference -->
+            <ids-dropdown id="siteReference" label="Site Reference" validate="required">
+                <ids-list-box>
+                    <ids-list-box-option id="csi_abc_corp" value="CSI_ABC_Corp">CSI_ABC_Corp</ids-list-box-option>
+                </ids-list-box>
+            </ids-dropdown>
+
+            <!-- Source Data File -->
+            <ids-trigger-field size="lg" label="Source Data File" validate="required" value="c:">
+                <ids-trigger-button slot="trigger-end">
+                    <ids-icon icon="search-list"></ids-icon>
+                </ids-trigger-button>
+            </ids-trigger-field>
+
+            <!-- Target Table -->
+            <ids-dropdown id="targetTable" label="Target Table" validate="required">
+                <ids-list-box>
+                    <ids-list-box-option id="targetTableBox" value="E">E</ids-list-box-option>
+                </ids-list-box>
+            </ids-dropdown>
+
+            <!-- Target File Delimiter -->
+            <ids-dropdown id="targetFileDelimiter" label="Target File Delimiter" validate="required">
+                <ids-list-box>
+                    <ids-list-box-option id="targetFileDelimiterBox" value=",">,</ids-list-box-option>
+                </ids-list-box>
+            </ids-dropdown>
+        </ids-layout-grid-cell>
+    </ids-layout-grid>
+</ids-form>
