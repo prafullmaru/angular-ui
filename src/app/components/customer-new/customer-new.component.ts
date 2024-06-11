@@ -1,5 +1,18 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import 'ids-enterprise-wc/enterprise-wc.js';
+
+interface MapGroup {
+  mapGroupID: number;
+  mapGroupName: string;
+  mapGroupDesc: string;
+  sourceProduct: string;
+  sourceProductVersion: string;
+  targetProduct: string;
+  dbType: string;
+  dbVersion: string;
+}
+
 
 @Component({
   selector: 'app-customer-new',
@@ -9,8 +22,21 @@ import 'ids-enterprise-wc/enterprise-wc.js';
 export class CustomerNewComponent {
 
   static instance: CustomerNewComponent;
-  constructor() {
+  customerName: string = '';
+  selectedSourceProduct: string = '';
+  selectedSourceVersion: string = '';
+  selectedTargetProduct: string = '';
+  sourceVersions: string[] = [];
+  mappingGroupName: string = '';
+
+  sourceProducts: any[] = [];
+  targetProducts: any[] = [];
+  constructor(private http: HttpClient) {
     CustomerNewComponent.instance = this;
+  }
+
+  ngOnInit() {
+    this.fetchProducts();
   }
 
   ngAfterViewInit() {
@@ -38,38 +64,59 @@ export class CustomerNewComponent {
     });
   }
 
+  fetchProducts() {
+    this.http.get<MapGroup[]>('http://54.163.252.133:8080/api/v1/mapGroups').subscribe({
+      next: (data: MapGroup[]) => {
+        console.log('API Response:', data);
+        this.processResponse(data);
+      },
+      error: (error: any) => {
+        console.error('Error fetching products', error);
+      }
+    });
+  }
 
+  processResponse(data: MapGroup[]) {
+    const sourceProductsMap = new Map<string, Set<string>>();
+    const targetProductsSet = new Set<string>();
 
+    data.forEach((item: MapGroup) => {
+      if (!sourceProductsMap.has(item.sourceProduct)) {
+        sourceProductsMap.set(item.sourceProduct, new Set<string>());
+      }
+      sourceProductsMap.get(item.sourceProduct)!.add(item.sourceProductVersion || '');
+      targetProductsSet.add(item.targetProduct);
+    });
+    this.sourceProducts = Array.from(sourceProductsMap.keys()).map(product => ({
+      name: product,
+      versions: Array.from(sourceProductsMap.get(product)!)
+    }));
+    this.targetProducts = Array.from(targetProductsSet).map(product => ({ name: product }));
+  }
 
-  customerName: string = '';
-  selectedSourceProduct: string = '';
-  selectedSourceVersion: string = '';
-  selectedTargetProduct: string = '';
-  sourceVersions: string[] = [];
-  mappingGroupName: string = '';
 
   setVersionsForSelectedSourceProduct(event: Event) {
     const selectedSourceValue = (event.target as HTMLSelectElement).value;
+    console.log('Selected Source Product:', selectedSourceValue);
     this.selectedSourceProduct = selectedSourceValue;
-    if (this.selectedSourceProduct === 'fc') {
-      this.sourceVersions = ['2', '2.5', '3'];
-    } else if (this.selectedSourceProduct === 'syt') {
-      this.sourceVersions = ['4'];
-    } else if (this.selectedSourceProduct === 'b4') {
-      this.sourceVersions = ['5'];
-    }
+    const selectedProduct = this.sourceProducts.find(product => product.name === selectedSourceValue);
+    this.sourceVersions = selectedProduct ? selectedProduct.versions : [];
+
+    console.log('Available Versions:', this.sourceVersions);
     this.selectedSourceVersion = '';
     this.updateMappingGroupName();
   }
 
   setSelectedSourceVersion(event: Event) {
     const selectedVersionValue = (event.target as HTMLSelectElement).value;
+    console.log('Selected Source Version:', selectedVersionValue);
     this.selectedSourceVersion = selectedVersionValue;
     this.updateMappingGroupName();
   }
 
   setSelectedTargetProduct(event: Event) {
     const selectedTargetValue = (event.target as HTMLSelectElement).value;
+    console.log('Selected Target Product:', selectedTargetValue);
     this.selectedTargetProduct = selectedTargetValue;
     this.updateMappingGroupName();
   }
@@ -89,21 +136,11 @@ export class CustomerNewComponent {
   }
 
   getSourceProductName(productId: string): string {
-    const productMap: { [key: string]: string } = {
-      fc: 'Facts',
-      syt: 'Syteline',
-      b4: 'Baan4'
-    };
-    return productMap[productId] || '';
+    return productId;
   }
 
   getTargetProductName(productId: string): string {
-    const productMap: { [key: string]: string } = {
-      csi: 'Cloud Suite Industrial (CSI)',
-      ln: 'Infor LN',
-      csf: 'CSF'
-    };
-    return productMap[productId] || '';
+    return productId;
   }
 
   clearForm() {

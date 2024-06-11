@@ -19,7 +19,8 @@ export class LoadToCSIComponent {
           customer: form.querySelector('#customer').value,
           loaderType: form.querySelector('#loaderType').value,
           siteReference: form.querySelector('#siteReference').value,
-          mappingGroupName: form.querySelector('#mappingGroupName').value
+          mappingGroupName: form.querySelector('#mappingGroupName').value,
+          siteReferenceRequired: form.querySelector('#siteReferenceRequired').checked
         });
       } else {
         console.error('Form is invalid');
