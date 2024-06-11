@@ -30,11 +30,11 @@ export class CustomerInquiryComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.columns.push({
-      id: 'selectionCheckbox',
+      id: 'selectionRadio',
       name: 'selection',
       sortable: false,
       resizable: false,
-      formatter: this.dataGrid.nativeElement.formatters.selectionCheckbox,
+      formatter: this.dataGrid.nativeElement.formatters.selectionRadio,
       align: 'center'
     });
     this.columns.push({
