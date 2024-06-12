@@ -21,7 +21,6 @@ export class CustomerNewComponent implements OnInit, AfterViewInit {
   allMapGroups: any[] = [];
   formData: any[] = [];
 
-
   constructor(private apiService: ApiService) {
     CustomerNewComponent.instance = this;
   }
@@ -86,6 +85,7 @@ export class CustomerNewComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
   handleToast() {
     const toastId = 'test-demo-toast';
     let toast: any = document.querySelector(`#${toastId}`);
@@ -169,6 +169,7 @@ export class CustomerNewComponent implements OnInit, AfterViewInit {
     console.log('Available Target Products:', this.targetProducts);
     this.selectedSourceVersion = '';
     this.selectedTargetProduct = '';
+    this.clearFields();
     this.updateMappingGroupName();
   }
 
@@ -199,16 +200,24 @@ export class CustomerNewComponent implements OnInit, AfterViewInit {
     return selectedMapGroup ? selectedMapGroup.mapGroupName : '';
   }
 
-  getSourceProductName(productId: string): string {
-    return productId;
-  }
-
-  getTargetProductName(productId: string): string {
-    return productId;
+  clearFields(){
+    const form = document.querySelector('#sample-form') as any;
+    form.querySelector('#sourceProductDropdown').value[0]
+    form.querySelector('#sourceVersionDropdown').value = '';
+    form.querySelector('#targetProductDropdown').value = '';
+    // form.querySelector('#sourceDatabase').value = '';
+    // form.querySelector('#linkedServer').value = '';
   }
 
   clearForm() {
+    this.selectedSourceVersion = '';
+    this.selectedTargetProduct = '';
     const form = document.querySelector('#sample-form') as any;
-    form.querySelector('#sourceProductDropdown').value=''
+    form.querySelector('#customerName').value = '';
+    form.querySelector('#sourceProductDropdown').value = '';
+    form.querySelector('#sourceVersionDropdown').value = '';
+    form.querySelector('#targetProductDropdown').value = '';
+    form.querySelector('#sourceDatabase').value = '';
+    form.querySelector('#linkedServer').value = '';
   }
 }

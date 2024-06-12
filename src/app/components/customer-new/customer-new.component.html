@@ -10,12 +10,14 @@
             <!-- Source Product Dropdown -->
             <ids-dropdown id="sourceProductDropdown" label="Source Product" [(ngModel)]="selectedSourceProduct" (change)="setVersionsForSelectedSourceProduct($event)" validate="required">
                 <ids-list-box>
+                    <ids-list-box-option value="blank" id="blank" aria-label="Blank"></ids-list-box-option>
                     <ids-list-box-option *ngFor="let product of sourceProducts" [value]="product.name">{{ product.name }}</ids-list-box-option>
                 </ids-list-box>
             </ids-dropdown>
             <!-- Target Product Dropdown -->
             <ids-dropdown id="targetProductDropdown" label="Target Product" [(ngModel)]="selectedTargetProduct" (change)="setSelectedTargetProduct($event)" validate="required">
                 <ids-list-box>
+                    <ids-list-box-option value="blank" id="blank" aria-label="Blank"></ids-list-box-option>
                     <ids-list-box-option *ngFor="let product of targetProducts" [value]="product">{{ product }}</ids-list-box-option>
                 </ids-list-box>
             </ids-dropdown>
@@ -26,6 +28,7 @@
             <!-- Source Version Dropdown -->
             <ids-dropdown id="sourceVersionDropdown" label="Source Version" [(ngModel)]="selectedSourceVersion" (change)="setSelectedSourceVersion($event)" validate="required">
                 <ids-list-box>
+                    <ids-list-box-option value="blank" id="blank" aria-label="Blank"></ids-list-box-option>
                     <ids-list-box-option *ngFor="let version of sourceVersions" [value]="version">{{ version }}</ids-list-box-option>
                 </ids-list-box>
             </ids-dropdown>

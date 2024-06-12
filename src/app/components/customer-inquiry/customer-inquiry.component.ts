@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import 'ids-enterprise-wc/enterprise-wc.js';
 import formDataJSON from "../../../api/form-data.json";
+import { ApiService } from '../../../app/services/api.service';
 
 interface GridColumn {
   id: string;
@@ -26,7 +27,7 @@ export class CustomerInquiryComponent implements AfterViewInit {
   public columns: GridColumn[] = [];
   public url: any = formDataJSON;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private apiService: ApiService) { }
 
   ngAfterViewInit(): void {
     this.columns.push({
@@ -88,7 +89,7 @@ export class CustomerInquiryComponent implements AfterViewInit {
     this.columns.push({
       id: 'MappingGroupName',
       name: 'Mapping Group Name',
-      field: 'MappingGroupName',
+      field: 'mapGroupName',
       formatter: this.dataGrid.nativeElement.formatters.text,
       // filterType: this.dataGrid.nativeElement.filters.text,
       sortable: true,
@@ -105,11 +106,17 @@ export class CustomerInquiryComponent implements AfterViewInit {
 
     });
 
-    // Fetch data from form-data.json src/api/*.json
-    this.http.get<any[]>('../../../api/form-data.json')
-      .subscribe(res => {
-        this.dataGrid.nativeElement.columns = this.columns;
-        this.dataGrid.nativeElement.data = res;
+  
+
+      this.apiService.getMapGroups().subscribe({
+        next: (data: any[]) => {
+          this.dataGrid.nativeElement.columns = this.columns;
+        this.dataGrid.nativeElement.data = data;;
+        },
+        error: (error: any) => {
+          console.error('Error fetching products', error);
+        }
       });
+    
   }
 }
