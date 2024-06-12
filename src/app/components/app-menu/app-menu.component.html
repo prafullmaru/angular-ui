@@ -19,35 +19,52 @@
       
       <!-- Icons for customer-new -->
       <ng-container *ngIf="currentRoute === 'customer-new'">
+        <!-- Save -->
         <ids-toolbar-section align="end" type="button">
           <ids-button id="btn-submit" icon="save" type="submit"></ids-button>
+          <ids-tooltip target="#btn-submit" id="tooltip-save">Save</ids-tooltip>
         </ids-toolbar-section>
+        <!-- Cancel -->
         <ids-toolbar-section align="end" type="button">
           <ids-button id="cancel" icon="cancel" (click)="cancel()"></ids-button>
+          <ids-tooltip target="#cancel" id="tooltip-cancel">Cancel</ids-tooltip>
         </ids-toolbar-section>
+        <!-- Rejected -->
         <ids-toolbar-section align="end" type="button">
           <ids-button id="rejected-outline" icon="rejected-outline" (click)="rejectedOutline()"></ids-button>
+          <ids-tooltip target="#rejected-outline" id="tooltip-rejected">Reject</ids-tooltip>
         </ids-toolbar-section>
+        <!-- Bolt -->
         <ids-toolbar-section align="end" type="button">
           <ids-button id="bolt" icon="bolt" (click)="bolt()"></ids-button>
         </ids-toolbar-section>
+        <!-- Filter -->
         <ids-toolbar-section align="end" type="button">
           <ids-button id="filter" icon="filter" (click)="filter()"></ids-button>
+          <ids-tooltip target="#filter" id="tooltip-filter">Filter</ids-tooltip>
         </ids-toolbar-section>
       </ng-container>
       
       <!-- Icons for customer-inquiry -->
       <ng-container *ngIf="currentRoute === 'customer-inquiry'">
+        <!-- Search -->
         <ids-toolbar-section align="end" type="input">
-            <ids-search-field clearable color-variant="alternate" label-state="collapsed" id="header-search" no-margins placeholder="Type to Search"></ids-search-field>        </ids-toolbar-section>
+            <ids-search-field clearable color-variant="alternate" label-state="collapsed" id="header-search" no-margins placeholder="Type to Search"></ids-search-field>        
+        </ids-toolbar-section>
+        <!-- Edit -->
         <ids-toolbar-section align="end" type="button">
           <ids-button id="edit" icon="edit" (click)="edit()"></ids-button>
+          <ids-tooltip target="#edit" id="tooltip-edit">Edit</ids-tooltip>
         </ids-toolbar-section>
+        <!-- Add -->
         <ids-toolbar-section align="end" type="button">
           <ids-button id="add" icon="add" (click)="add()"></ids-button>
+          <ids-tooltip target="#add" id="tooltip-add">Add</ids-tooltip>
         </ids-toolbar-section>
+        <!-- Copy -->
         <ids-toolbar-section align="end" type="button">
           <ids-button id="copy" icon="copy" (click)="copy()"></ids-button>
+          <ids-tooltip target="#copy" id="tooltip-copy">Copy</ids-tooltip>
         </ids-toolbar-section>
       </ng-container>
 

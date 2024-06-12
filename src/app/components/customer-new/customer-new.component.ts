@@ -21,11 +21,14 @@ export class CustomerNewComponent implements OnInit, AfterViewInit {
   allMapGroups: any[] = [];
   formData: any[] = [];
 
+
   constructor(private apiService: ApiService) {
     CustomerNewComponent.instance = this;
   }
+  container: any;
 
   ngOnInit() {
+    this.container = document.querySelector('ids-form');
     this.fetchProducts();
     this.loadFormData();
   }
@@ -75,11 +78,25 @@ export class CustomerNewComponent implements OnInit, AfterViewInit {
   submitForm(formData: any) {
     this.apiService.submitForm(formData).subscribe({
       next: (response) => {
+        this.handleToast();
         console.info('Form Submitted', response);
       },
       error: (error) => {
         console.error('Error submitting form', error);
       }
+    });
+  }
+  handleToast() {
+    const toastId = 'test-demo-toast';
+    let toast: any = document.querySelector(`#${toastId}`);
+    if (!toast) {
+      toast = document.createElement('ids-toast');
+      toast.setAttribute('id', toastId);
+      this.container?.appendChild(toast);
+    }
+    toast.show({
+      title: 'New Customer',
+      message: 'Saved'
     });
   }
 
