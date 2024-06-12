@@ -1,0 +1,42 @@
+[
+    {
+      "requestID": "null",
+      "loaderName": "NewCustomer",
+      "paramName": "CustomerName",
+      "paramValue": "null",
+      "variablename": "null",
+      "skipValue": "null",
+      "primaryMapCode": "null",
+      "secondaryMapCode": "null"
+    },
+    {
+      "requestID": "null",
+      "loaderName": "NewCustomer",
+      "paramName": "LS_SRC_PREFIX",
+      "paramValue":  "null",
+      "variablename": "null",
+      "skipValue": "null",
+      "primaryMapCode": "null",
+      "secondaryMapCode": "null"
+    },
+    {
+      "requestID": "null",
+      "loaderName": "NewCustomer",
+      "paramName": "MapGroupName",
+      "paramValue": "null",
+      "variablename": "test",
+      "skipValue": "null",
+      "primaryMapCode": "null",
+      "secondaryMapCode": "null"
+    },
+    {
+      "requestID": "null",
+      "loaderName": "NewCustomer",
+      "paramName": "SRC_PREFIX",
+      "paramValue": "null",
+      "variablename": "null",
+      "skipValue": "null",
+      "primaryMapCode": "null",
+      "secondaryMapCode": "null"
+    }
+  ]

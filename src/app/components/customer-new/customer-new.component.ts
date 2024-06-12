@@ -1,25 +1,12 @@
-import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
-import 'ids-enterprise-wc/enterprise-wc.js';
-
-interface MapGroup {
-  mapGroupID: number;
-  mapGroupName: string;
-  mapGroupDesc: string;
-  sourceProduct: string;
-  sourceProductVersion: string;
-  targetProduct: string;
-  dbType: string;
-  dbVersion: string;
-}
-
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { ApiService } from '../../../app/services/api.service';
 
 @Component({
   selector: 'app-customer-new',
   templateUrl: './customer-new.component.html',
   styleUrls: ['./customer-new.component.scss']
 })
-export class CustomerNewComponent {
+export class CustomerNewComponent implements OnInit, AfterViewInit {
 
   static instance: CustomerNewComponent;
   customerName: string = '';
@@ -31,14 +18,16 @@ export class CustomerNewComponent {
 
   sourceProducts: any[] = [];
   targetProducts: any[] = [];
-  allMapGroups: MapGroup[] = [];
+  allMapGroups: any[] = [];
+  formData: any[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(private apiService: ApiService) {
     CustomerNewComponent.instance = this;
   }
 
   ngOnInit() {
     this.fetchProducts();
+    this.loadFormData();
   }
 
   ngAfterViewInit() {
@@ -49,51 +38,8 @@ export class CustomerNewComponent {
       e.preventDefault();
       form.checkValidation();
       if (form.isValid) {
-        this.submitForm(
-          [
-            {
-              "requestID": "null",
-              "loaderName": "NewCustomer",
-              "paramName": "CustomerName",
-              "paramValue": form.querySelector('#customerName').value,
-              "variablename": "null",
-              "skipValue": "null",
-              "primaryMapCode": "null",
-              "secondaryMapCode": "null"
-            },
-            {
-              "requestID": "null",
-              "loaderName": "NewCustomer",
-              "paramName": "LS_SRC_PREFIX",
-              "paramValue":  form.querySelector('#linkedServer').value,
-              "variablename": "null",
-              "skipValue": "null",
-              "primaryMapCode": "null",
-              "secondaryMapCode": "null"
-            },
-            {
-              "requestID": "null",
-              "loaderName": "NewCustomer",
-              "paramName": "MapGroupName",
-              "paramValue": this.mappingGroupName,
-              "variablename": "test",
-              "skipValue": "null",
-              "primaryMapCode": "null",
-              "secondaryMapCode": "null"
-            },
-            {
-              "requestID": "null",
-              "loaderName": "NewCustomer",
-              "paramName": "SRC_PREFIX",
-              "paramValue": form.querySelector('#sourceDatabase').value,
-              "variablename": "null",
-              "skipValue": "null",
-              "primaryMapCode": "null",
-              "secondaryMapCode": "null"
-            }
-          ]
-
-        );
+        this.populateFormData(form);
+        this.submitForm(this.formData);
       } else {
         console.error('Form is invalid');
       }
@@ -104,8 +50,30 @@ export class CustomerNewComponent {
     });
   }
 
+  populateFormData(form: any) {
+    this.formData = this.formData.map(item => {
+      switch (item.paramName) {
+        case 'CustomerName':
+          item.paramValue = form.querySelector('#customerName').value;
+          break;
+        case 'LS_SRC_PREFIX':
+          item.paramValue = form.querySelector('#linkedServer').value;
+          break;
+        case 'MapGroupName':
+          item.paramValue = this.mappingGroupName;
+          break;
+        case 'SRC_PREFIX':
+          item.paramValue = form.querySelector('#sourceDatabase').value;
+          break;
+        default:
+          break;
+      }
+      return item;
+    });
+  }
+
   submitForm(formData: any) {
-    this.http.post('http://54.163.252.133:8080/api/v1/elParamsList', formData).subscribe({
+    this.apiService.submitForm(formData).subscribe({
       next: (response) => {
         console.info('Form Submitted', response);
       },
@@ -116,9 +84,8 @@ export class CustomerNewComponent {
   }
 
   fetchProducts() {
-    this.http.get<MapGroup[]>('http://54.163.252.133:8080/api/v1/mapGroups').subscribe(
-      {
-      next: (data: MapGroup[]) => {
+    this.apiService.getMapGroups().subscribe({
+      next: (data: any[]) => {
         console.log('API Response:', data);
         this.processResponse(data);
       },
@@ -128,13 +95,25 @@ export class CustomerNewComponent {
     });
   }
 
-  processResponse(data: MapGroup[]) {
+  loadFormData() {
+    this.apiService.getFormData().subscribe({
+      next: (data: any[]) => {
+        console.log('Form Data:', data);
+        this.formData = data;
+      },
+      error: (error: any) => {
+        console.error('Error loading form data', error);
+      }
+    });
+  }
+
+  processResponse(data: any[]) {
     const sourceProductsMap = new Map<string, Set<string>>();
     const targetProductsMap = new Map<string, Set<string>>();
 
     this.allMapGroups = data;
 
-    data.forEach((item: MapGroup) => {
+    data.forEach((item: any) => {
       if (!sourceProductsMap.has(item.sourceProduct)) {
         sourceProductsMap.set(item.sourceProduct, new Set<string>());
       }
