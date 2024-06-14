@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import IdsDataGrid from 'ids-enterprise-wc/components/ids-data-grid/ids-data-grid';
 import 'ids-enterprise-wc/enterprise-wc.js';
 import { CustomerNewComponent } from '../customer-new/customer-new.component';
 @Component({
@@ -97,6 +98,10 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
   edit() {
     this.navigateTo("customer-edit")
     console.log('Edit action triggered')
+    const dataGrid = document.querySelector<IdsDataGrid>('#data-grid-editable')!;
+    const selectedData = dataGrid.selectedRows.map((row: any) => row.data);
+    console.log("selectedData",selectedData)
+
   }
 
   add() {
