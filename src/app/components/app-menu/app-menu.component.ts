@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { NavigationEnd, Router } from '@angular/router';
 import IdsDataGrid from 'ids-enterprise-wc/components/ids-data-grid/ids-data-grid';
 import 'ids-enterprise-wc/enterprise-wc.js';
+import { DataService } from '../../services/data.service';
 import { CustomerNewComponent } from '../customer-new/customer-new.component';
 @Component({
   selector: 'app-menu',
@@ -14,7 +15,7 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
   @ViewChild('appMenuTriggerBtn', { read: ElementRef }) appMenuTriggerBtn!: ElementRef<HTMLElement>;
 
   public disabled: boolean = true;
-  constructor(private router: Router) {}
+  constructor(private router: Router, private dataService: DataService) {}
 
   currentTitle = 'Welcome! ';
   currentRoute!: string;
@@ -101,7 +102,7 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
     const dataGrid = document.querySelector<IdsDataGrid>('#data-grid-editable')!;
     const selectedData = dataGrid.selectedRows.map((row: any) => row.data);
     console.log("selectedData",selectedData)
-
+    this.dataService.setSelectedData(selectedData);
   }
 
   add() {
