@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<ids-form submit-button="btn-submit" id="sample-form">
+    <ids-layout-grid cols="1" cols-md="2" padding="md">
+
+        <!-- Customer Name -->
+        <ids-layout-grid-cell>
+            <ids-input id="customerName" type="text" label="Customer Name" readonly="true" [(ngModel)]="customerName" value=""></ids-input>
+        </ids-layout-grid-cell>
+
+         <!-- Mapping Group Name -->
+        <ids-layout-grid-cell>
+            <ids-input id="mappingGroupName" type="text" label="Mapping Group Name" readonly="true" [value]="mappingGroupName"></ids-input>
+        </ids-layout-grid-cell>
+
+        <!-- Active -->
+        <ids-layout-grid-cell>
+            <ids-checkbox id="customerEditActiveCheckbox" label="Active" checked="true"></ids-checkbox>
+        </ids-layout-grid-cell>
+
+        <!-- Status -->
+        <ids-layout-grid-cell>
+            <ids-dropdown id="customer-edit-status" label="Status"></ids-dropdown>
+            <ids-list-box-option value="blank" id="blank" aria-label="Blank"></ids-list-box-option>
+            <ids-list-box-option value="Ongoing" id="Ongoing" label="Ongoing"></ids-list-box-option>
+        </ids-layout-grid-cell>
+        </ids-layout-grid>
+</ids-form>

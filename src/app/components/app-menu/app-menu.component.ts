@@ -29,6 +29,10 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
         this.currentTitle = 'Customer<br> Inquiry';
         this.router.navigate([`/${screen}`]);
         break;
+      case 'customer-edit':
+        this.currentTitle = 'Customer<br> Edit';
+        this.router.navigate([`/${screen}`]);
+        break;
       case 'load-to-csi':
         this.currentTitle = 'Extract, Transform, Load<br>Load Data Extracts';
         this.router.navigate([`/${screen}`]);
@@ -91,6 +95,7 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
   }
 
   edit() {
+    this.navigateTo("customer-edit")
     console.log('Edit action triggered')
   }
 

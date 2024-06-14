@@ -43,15 +43,30 @@ export class CustomerNewComponent implements OnInit, AfterViewInit {
         this.populateFormData(form);
         this.submitForm(this.formData);
       } else {
+        this.handleFormError();
         console.error('Form is invalid');
       }
-    });
+    });   
 
     submitButton?.addEventListener('click', () => {
       form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
     });
   }
 
+  handleFormError(){
+      const toastId = 'test-demo-toast';
+      let toast: any = document.querySelector(`#${toastId}`);
+      if (!toast) {
+        toast = document.createElement('ids-toast');
+        toast.setAttribute('id', toastId);
+        this.container?.appendChild(toast);
+      }
+      toast.show({
+        title: "Dear Customer,",
+        message: 'Please complete all required fields'
+      });
+    }
+  
   populateFormData(form: any) {
     this.formData = this.formData.map(item => {
       switch (item.paramName) {
@@ -77,16 +92,17 @@ export class CustomerNewComponent implements OnInit, AfterViewInit {
   submitForm(formData: any) {
     this.apiService.submitForm(formData).subscribe({
       next: (response) => {
-        this.handleToast();
+        this.handleSuccessToast();
         console.info('Form Submitted', response);
       },
       error: (error) => {
+        this.handleErrorToast(error)
         console.error('Error submitting form', error);
       }
     });
   }
 
-  handleToast() {
+  handleSuccessToast() {
     const toastId = 'test-demo-toast';
     let toast: any = document.querySelector(`#${toastId}`);
     if (!toast) {
@@ -97,6 +113,20 @@ export class CustomerNewComponent implements OnInit, AfterViewInit {
     toast.show({
       title: 'New Customer',
       message: 'Saved'
+    });
+  }
+
+  handleErrorToast(error: any) {
+    const toastId = 'test-demo-toast';
+    let toast: any = document.querySelector(`#${toastId}`);
+    if (!toast) {
+      toast = document.createElement('ids-toast');
+      toast.setAttribute('id', toastId);
+      this.container?.appendChild(toast);
+    }
+    toast.show({
+      title: error.error.error,
+      message: error.message
     });
   }
 

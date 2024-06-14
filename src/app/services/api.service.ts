@@ -24,4 +24,8 @@ export class ApiService {
     return this.http.get('../../api/customer-new.json');
   }
 
+  getCustomers(): Observable<any>{
+    return this.http.get(`${this.baseUrl}/customers`);
+  }
+
 }

@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import 'ids-enterprise-wc/enterprise-wc.js';
-import formDataJSON from "../../../api/form-data.json";
 import { ApiService } from '../../../app/services/api.service';
 
 interface GridColumn {
@@ -25,8 +24,6 @@ interface GridColumn {
 export class CustomerInquiryComponent implements AfterViewInit {
   @ViewChild('dataGrid', { read: ElementRef }) dataGrid!: ElementRef;
   public columns: GridColumn[] = [];
-  public url: any = formDataJSON;
-
   constructor(private http: HttpClient, private apiService: ApiService) { }
 
   ngAfterViewInit(): void {
@@ -59,7 +56,7 @@ export class CustomerInquiryComponent implements AfterViewInit {
     this.columns.push({
       id: 'sourceProduct',
       name: 'Source Product',
-      field: 'sourceProduct',
+      field:  'mapGroupInfo.sourceProduct',
       formatter: this.dataGrid.nativeElement.formatters.text,
       // filterType: this.dataGrid.nativeElement.filters.text,
       sortable: true,
@@ -69,7 +66,7 @@ export class CustomerInquiryComponent implements AfterViewInit {
     this.columns.push({
       id: 'sourceProductVersion',
       name: 'Source Product Version',
-      field: 'sourceProductVersion',
+      field: 'mapGroupInfo.sourceProductVersion',
       formatter: this.dataGrid.nativeElement.formatters.text,
       // filterType: this.dataGrid.nativeElement.filters.text,
       sortable: true,
@@ -79,7 +76,7 @@ export class CustomerInquiryComponent implements AfterViewInit {
     this.columns.push({
       id: 'targetProduct',
       name: 'Target Product',
-      field: 'targetProduct',
+      field: 'mapGroupInfo.targetProduct',
       formatter: this.dataGrid.nativeElement.formatters.text,
       // filterType: this.dataGrid.nativeElement.filters.text,
       sortable: true,
@@ -87,9 +84,9 @@ export class CustomerInquiryComponent implements AfterViewInit {
 
     });
     this.columns.push({
-      id: 'MappingGroupName',
+      id: 'mappingGroupName',
       name: 'Mapping Group Name',
-      field: 'mapGroupName',
+      field: 'mapGroupInfo.mapGroupName',
       formatter: this.dataGrid.nativeElement.formatters.text,
       // filterType: this.dataGrid.nativeElement.filters.text,
       sortable: true,
@@ -108,10 +105,10 @@ export class CustomerInquiryComponent implements AfterViewInit {
 
   
 
-      this.apiService.getMapGroups().subscribe({
+      this.apiService.getCustomers().subscribe({
         next: (data: any[]) => {
           this.dataGrid.nativeElement.columns = this.columns;
-        this.dataGrid.nativeElement.data = data;;
+          this.dataGrid.nativeElement.data = data;
         },
         error: (error: any) => {
           console.error('Error fetching products', error);
