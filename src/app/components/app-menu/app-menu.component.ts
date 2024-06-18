@@ -10,7 +10,7 @@ import { CustomerNewComponent } from '../customer-new/customer-new.component';
   styleUrls: ['./app-menu.component.scss']
 })
 export class AppMenuComponent implements OnInit, AfterViewInit {
-
+  @ViewChild('modal', { read: ElementRef }) modal: any;
   @ViewChild('appMenuDrawer', { read: ElementRef }) appMenuDrawer!: ElementRef<HTMLElement>;
   @ViewChild('appMenuTriggerBtn', { read: ElementRef }) appMenuTriggerBtn!: ElementRef<HTMLElement>;
 
@@ -93,7 +93,12 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
   }
 
   rejectedOutline() {
+    this.modal.nativeElement.show();
     console.log('Rejected Outline action triggered');
+  }
+
+  yesModalRedirectTo() {
+    this.navigateTo('/')
   }
 
   edit() {
@@ -107,6 +112,7 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
 
   add() {
     console.log('add action triggered')
+    this.navigateTo("customer-new");  
   }
   copy() {
     console.log('Copy action is triggered')

@@ -86,6 +86,16 @@
     </ids-toolbar>
   </ids-header>
 
+  <ids-modal #modal id="cancel-modal" aria-labelledby="my-modal-title">
+    <ids-text slot="title" font-size="24" type="h2" id="my-modal-title">Do you want to cancel?</ids-text>
+    <br>
+    <ids-modal-button slot="buttons" id="modal-cancel-btn" appearance="secondary" cancel>
+      <span>No</span>
+    </ids-modal-button>
+    <ids-modal-button (click) = "yesModalRedirectTo()"slot="buttons" id="modal-save-btn" appearance="primary">
+      <span>Yes</span>
+    </ids-modal-button>
+  </ids-modal>
   <router-outlet></router-outlet>
 
   <ids-app-menu

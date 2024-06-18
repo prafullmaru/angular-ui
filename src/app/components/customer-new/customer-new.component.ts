@@ -20,6 +20,7 @@ export class CustomerNewComponent implements OnInit, AfterViewInit {
   targetProducts: any[] = [];
   allMapGroups: any[] = [];
   formData: any[] = [];
+  existingCustomers: any[] = [];
 
   constructor(private apiService: ApiService) {
     CustomerNewComponent.instance = this;
@@ -30,11 +31,27 @@ export class CustomerNewComponent implements OnInit, AfterViewInit {
     this.container = document.querySelector('ids-form');
     this.fetchProducts();
     this.loadFormData();
+    this.loadExistingCustomers();
   }
 
   ngAfterViewInit() {
     const form = document.querySelector('#sample-form') as any;
     const submitButton = document.querySelector('#btn-submit') as any;
+    const inputError: any = document.querySelector('#customerName');
+
+    inputError.addEventListener('input', () => {
+      const customerName = inputError.value.trim().toLowerCase();
+      const exists = this.existingCustomers.some(customer => customer.customerName.toLowerCase() === customerName);
+      if (exists) {
+        inputError.addValidationMessage({
+          message: 'Customer already exists',
+          type: 'error',
+          id: 'error'
+        });
+      } else {
+        inputError.removeValidationMessage('error');
+      }
+    });
 
     form?.addEventListener('submit', (e: Event) => {
       e.preventDefault();
@@ -46,27 +63,39 @@ export class CustomerNewComponent implements OnInit, AfterViewInit {
         this.handleFormError();
         console.error('Form is invalid');
       }
-    });   
+    });
 
     submitButton?.addEventListener('click', () => {
       form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
     });
   }
 
-  handleFormError(){
-      const toastId = 'test-demo-toast';
-      let toast: any = document.querySelector(`#${toastId}`);
-      if (!toast) {
-        toast = document.createElement('ids-toast');
-        toast.setAttribute('id', toastId);
-        this.container?.appendChild(toast);
+  loadExistingCustomers() {
+    this.apiService.getCustomers().subscribe({
+      next: (customers: any[]) => {
+        this.existingCustomers = customers;
+      },
+      error: (error: any) => {
+        this.handleErrorToast(error);
+        console.error('Error loading existing customers', error);
       }
-      toast.show({
-        title: "Dear Customer,",
-        message: 'Please complete all required fields'
-      });
+    });
+  }
+
+  handleFormError(){
+    const toastId = 'test-demo-toast';
+    let toast: any = document.querySelector(`#${toastId}`);
+    if (!toast) {
+      toast = document.createElement('ids-toast');
+      toast.setAttribute('id', toastId);
+      this.container?.appendChild(toast);
     }
-  
+    toast.show({
+      title: "Dear Customer,",
+      message: 'Please complete all required fields'
+    });
+  }
+
   populateFormData(form: any) {
     this.formData = this.formData.map(item => {
       switch (item.paramName) {
@@ -137,6 +166,7 @@ export class CustomerNewComponent implements OnInit, AfterViewInit {
         this.processResponse(data);
       },
       error: (error: any) => {
+        this.handleErrorToast(error);
         console.error('Error fetching products', error);
       }
     });

@@ -20,8 +20,17 @@
         <!-- Status -->
         <ids-layout-grid-cell>
             <ids-dropdown id="customer-edit-status" label="Status"></ids-dropdown>
-            <ids-list-box-option value="blank" id="blank" aria-label="Blank"></ids-list-box-option>
-            <ids-list-box-option value="Ongoing" id="Ongoing" label="Ongoing"></ids-list-box-option>
+            <!-- <ids-list-box-option value="blank" id="blank" aria-label="Blank"></ids-list-box-option>
+            <ids-list-box-option value="Ongoing" id="Ongoing" label="Ongoing"></ids-list-box-option> -->
         </ids-layout-grid-cell>
+
+        <ids-layout-grid>
+            <!-- Source Database -->
+            <ids-input id="sourceDatabase" type="text" label="Source Database" [value]="" placeholder="[LinkedServer].[Catlog].[Library]"></ids-input>
+        </ids-layout-grid>
+        <ids-layout-grid>
+            <!-- Linked Server -->  
+            <ids-input id="linkedServer" type="text" label="Linked Server" [value]="" placeholder="[LinkedServer]."></ids-input>
+        </ids-layout-grid>
         </ids-layout-grid>
 </ids-form>
