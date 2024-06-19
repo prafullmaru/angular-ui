@@ -29,6 +29,7 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
       'customer-edit': 'Customer<br> Edit',
       'load-to-csi': 'Extract, Transform, Load<br>Load Data Extracts',
       'load-csv-to-table': 'Extract, Transform, Load<br>Import CSV File To Table',
+      'customer-site-reference-x-ref-new' : 'Customer<br>Site Reference X-Ref New'
     };
   
     this.currentTitle = screenTitles[screen] || 'Title';
