@@ -38,7 +38,7 @@ export class CustomerNewComponent implements OnInit, AfterViewInit {
     const form = document.querySelector('#sample-form') as any;
     const submitButton = document.querySelector('#btn-submit') as any;
     const inputError: any = document.querySelector('#customerName');
-
+  
     inputError.addEventListener('input', () => {
       const customerName = inputError.value.trim().toLowerCase();
       const exists = this.existingCustomers.some(customer => customer.customerName.toLowerCase() === customerName);
@@ -49,10 +49,10 @@ export class CustomerNewComponent implements OnInit, AfterViewInit {
           id: 'error'
         });
       } else {
-        inputError.removeValidationMessage('error');
+        inputError.removeValidationMessage({ id: 'error' });
       }
     });
-
+  
     form?.addEventListener('submit', (e: Event) => {
       e.preventDefault();
       form.checkValidation();
@@ -64,12 +64,12 @@ export class CustomerNewComponent implements OnInit, AfterViewInit {
         console.error('Form is invalid');
       }
     });
-
+  
     submitButton?.addEventListener('click', () => {
       form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
     });
   }
-
+  
   loadExistingCustomers() {
     this.apiService.getCustomers().subscribe({
       next: (customers: any[]) => {
@@ -270,6 +270,7 @@ export class CustomerNewComponent implements OnInit, AfterViewInit {
   }
 
   clearForm() {
+    this.removeValidationMessage();
     this.selectedSourceVersion = '';
     this.selectedTargetProduct = '';
     const form = document.querySelector('#sample-form') as any;
@@ -279,5 +280,11 @@ export class CustomerNewComponent implements OnInit, AfterViewInit {
     form.querySelector('#targetProductDropdown').value = '';
     form.querySelector('#sourceDatabase').value = '';
     form.querySelector('#linkedServer').value = '';
+  }
+
+  removeValidationMessage() {
+    const form = document.querySelector('#sample-form') as any;
+    const inputError = form.querySelector('#customerName')
+    form?.addEventListener('click', inputError?.removeValidationMessage({ id: 'error' }));
   }
 }
