@@ -11,7 +11,7 @@ export class CustomerEditComponent implements OnInit {
 
   customerName: string = '';
   mappingGroupName: string = '';
-  status: string = '';
+  selectedEditStatus: string = '';
   checked: boolean = false;
   selectedData: any;
   static instance: CustomerEditComponent;
@@ -37,7 +37,7 @@ export class CustomerEditComponent implements OnInit {
       e.preventDefault();
       form.checkValidation();
       if (form.isValid) {
-        this.submitForm(this.selectedData);
+        this.submitEditForm(this.selectedData);
       } else {
         console.error('Form is invalid');
       }
@@ -51,11 +51,19 @@ export class CustomerEditComponent implements OnInit {
   updateForm(data: any) {
     this.customerName = data.customerName;
     this.mappingGroupName = data.mapGroupInfo?.mapGroupName ?? 'null';
-    this.checked = data.isEnabled === 1;
-    
+    this.checked = data.isEnabled === 1;    
   }
 
-  submitForm(formData: any) {
+  setSelectedEditStatus(event: Event) {
+    this.selectedEditStatus = (event.target as HTMLSelectElement).value;
+    
+    if (this.selectedData) {
+      this.selectedData.status = this.selectedEditStatus;
+    }
+    console.log("this.selectedEditStatus", this.selectedEditStatus)
+  }
+
+  submitEditForm(formData: any) {
     this.apiService.updateCustomer(formData).subscribe({
       next: (response) => {
         console.info('Form Submitted', response);
@@ -67,14 +75,13 @@ export class CustomerEditComponent implements OnInit {
   }
 
   clearForm() {
-    this.customerName = '';
-    this.mappingGroupName = '';
-    this.status = '';
-    this.checked = false;
+    const form = document.querySelector('#customer-edit-form') as any;
+    form.querySelector('#customer-edit-status').value = '';
   }
 
   onUpdate(event: any): void {
     this.checked = event.target.checked;
+
     if (this.selectedData) {
       this.selectedData.isEnabled = this.checked ? 1 : 0;
     }

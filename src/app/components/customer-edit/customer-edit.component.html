@@ -24,12 +24,12 @@
 
         <!-- Status -->
         <ids-layout-grid-cell>
-            <ids-dropdown id="customer-edit-status" label="Status">
+            <ids-dropdown id="customer-edit-status" label="Status" [(ngModel)]="selectedEditStatus" (change)="setSelectedEditStatus($event)">
                 <ids-list-box>
-                    <ids-list-box-option value="blank" id="blank" aria-label="Blank"></ids-list-box-option>
-                    <ids-list-box-option id = "status-initiate" value="Initiate">Initiate</ids-list-box-option>
-                    <ids-list-box-option id = "status-onGoing" value="Ongoing">Ongoing</ids-list-box-option>
-                    <ids-list-box-option id = "status-conclude" value="Conclude">Conclude</ids-list-box-option>
+                    <ids-list-box-option aria-label="Blank"></ids-list-box-option>
+                    <ids-list-box-option id = "status-initiate" value="Y">Y</ids-list-box-option>
+                    <ids-list-box-option id = "status-onGoing" value="N">N</ids-list-box-option>
+                    <ids-list-box-option id = "status-conclude" value="null">null</ids-list-box-option>
                 </ids-list-box>            
             </ids-dropdown>
         </ids-layout-grid-cell>
