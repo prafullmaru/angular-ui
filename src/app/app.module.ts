@@ -10,7 +10,8 @@ import { CustomerInquiryComponent } from './components/customer-inquiry/customer
 import { CustomerNewComponent } from './components/customer-new/customer-new.component';
 import { LoadCsvToTableComponent } from './components/load-csv-to-table/load-csv-to-table.component';
 import { LoadToCSIComponent } from './components/load-to-csi/load-to-csi.component';
-import {CustomerSiteXRefNewComponent} from './components/customer-site-x-ref-new/customer-site-x-ref-new.component'
+import {CustomerSiteXRefNewComponent} from './components/customer-site-x-ref-new/customer-site-x-ref-new.component';
+import { CustomerSitesInquiryComponent } from './components/customer-sites-inquiry/customer-sites-inquiry.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +22,7 @@ import {CustomerSiteXRefNewComponent} from './components/customer-site-x-ref-new
     LoadCsvToTableComponent,
     CustomerEditComponent,
     CustomerSiteXRefNewComponent,
+    CustomerSitesInquiryComponent,
   ],
   imports: [
     BrowserModule,

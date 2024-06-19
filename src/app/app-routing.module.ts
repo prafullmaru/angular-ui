@@ -6,6 +6,7 @@ import { CustomerNewComponent } from './components/customer-new/customer-new.com
 import { LoadCsvToTableComponent } from './components/load-csv-to-table/load-csv-to-table.component';
 import { LoadToCSIComponent } from './components/load-to-csi/load-to-csi.component';
 import { CustomerSiteXRefNewComponent } from './components/customer-site-x-ref-new/customer-site-x-ref-new.component';
+import { CustomerSitesInquiryComponent } from './components/customer-sites-inquiry/customer-sites-inquiry.component';
 
 const routes: Routes = [
   { 
@@ -29,7 +30,11 @@ const routes: Routes = [
   }, 
   {
     path: 'customer-site-reference-x-ref-new', component: CustomerSiteXRefNewComponent
-  }
+  }, 
+  {
+    path: 'customer-site-inquiry', component: CustomerSitesInquiryComponent
+  }, 
+
 ];
 
 @NgModule({
