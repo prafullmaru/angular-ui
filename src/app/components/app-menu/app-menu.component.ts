@@ -3,6 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import IdsDataGrid from 'ids-enterprise-wc/components/ids-data-grid/ids-data-grid';
 import 'ids-enterprise-wc/enterprise-wc.js';
 import { DataService } from '../../services/data.service';
+import { CustomerEditComponent } from '../customer-edit/customer-edit.component';
 import { CustomerNewComponent } from '../customer-new/customer-new.component';
 @Component({
   selector: 'app-menu',
@@ -78,15 +79,18 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
 
   }
 
-
-  cancel() {
-    console.log('Cancel action triggered');
-    if (CustomerNewComponent.instance) {
-      CustomerNewComponent.instance.clearForm();
+  cancelForm(type: string) {
+    console.log(`Cancel ${type} action triggered`);
+    const componentInstance = type === 'new' ? CustomerNewComponent.instance : 
+                              type === 'edit' ? CustomerEditComponent.instance : 
+                              null;
+    if (componentInstance) {
+        componentInstance.clearForm();
     } else {
-      console.error('Screen1Component not available');
+        console.error(`${type === 'new' ? 'Customer-new' : 'CustomerEdit'} not available`);
     }
-  }
+}
+
 
   bolt() {
     console.log('Bolt action triggered');

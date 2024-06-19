@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<ids-form submit-button="btn-submit" id="sample-form">
+<ids-form submit-button="btn-submit" id="customer-edit-form">
     <ids-layout-grid cols="1" cols-md="2" padding="md">
 
         <!-- Customer Name -->
@@ -19,9 +19,12 @@
 
         <!-- Status -->
         <ids-layout-grid-cell>
-            <ids-dropdown id="customer-edit-status" label="Status"></ids-dropdown>
-            <!-- <ids-list-box-option value="blank" id="blank" aria-label="Blank"></ids-list-box-option>
-            <ids-list-box-option value="Ongoing" id="Ongoing" label="Ongoing"></ids-list-box-option> -->
+            <ids-dropdown id="customer-edit-status" label="Status">
+                <ids-list-box>
+                    <ids-list-box-option value="blank" id="blank" aria-label="Blank"></ids-list-box-option>
+                    <ids-list-box-option id = "status" [value]="status">{{status}}</ids-list-box-option>
+                </ids-list-box>            
+            </ids-dropdown>
         </ids-layout-grid-cell>
 
         <ids-layout-grid>
