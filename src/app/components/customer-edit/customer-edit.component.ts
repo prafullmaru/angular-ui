@@ -1,41 +1,82 @@
-import { Component } from '@angular/core';
-import 'ids-enterprise-wc';
+import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../../services/api.service';
 import { DataService } from '../../services/data.service';
+
 @Component({
   selector: 'app-customer-edit',
   templateUrl: './customer-edit.component.html',
   styleUrl: './customer-edit.component.scss'
 })
-export class CustomerEditComponent {
-  customerName: any;
-  mappingGroupName: any;
-  status: any;
+export class CustomerEditComponent implements OnInit {
 
-  selectedData: any[] | undefined;
+  customerName: string = '';
+  mappingGroupName: string = '';
+  status: string = '';
+  checked: boolean = false;
+  selectedData: any;
   static instance: CustomerEditComponent;
-  constructor(private dataService: DataService) {
+  constructor(
+    private dataService: DataService,
+    private apiService: ApiService,
+  ) {
     CustomerEditComponent.instance = this;
   }
 
   ngOnInit() {
+    const form = document.querySelector('#customer-edit-form') as any;
+    const submitButton = document.querySelector('#btn-submit-edit') as any;
+
     this.dataService.selectedData$.subscribe(data => {
-      this.selectedData = data;
-      this.customerName = data[0].customerName
-      this.mappingGroupName = data[0].mapGroupInfo.mapGroupName
-      if(data[0].status = "null"){
-        this.status = "null"
+      if (data && data.length > 0) {
+        this.selectedData = data[0];
+        this.updateForm(this.selectedData);
       }
-      else {
-        this.status = data[0].status
+    });
+
+    form?.addEventListener('submit', (e: Event) => {
+      e.preventDefault();
+      form.checkValidation();
+      if (form.isValid) {
+        this.submitForm(this.selectedData);
+      } else {
+        console.error('Form is invalid');
       }
-      console.log("this.customerName", this.customerName)
-      console.log("this.status", this.status)
+    });
+
+    submitButton?.addEventListener('click', () => {
+      form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
     });
   }
-  clearForm() {
-    const form = document.querySelector('#customer-edit-form') as any;
-    form.querySelector('#customer-edit-status').value = '';
-    console.log("this.status", this.status)
+
+  updateForm(data: any) {
+    this.customerName = data.customerName;
+    this.mappingGroupName = data.mapGroupInfo?.mapGroupName ?? 'null';
+    this.checked = data.isEnabled === 1;
+    
   }
 
+  submitForm(formData: any) {
+    this.apiService.updateCustomer(formData).subscribe({
+      next: (response) => {
+        console.info('Form Submitted', response);
+      },
+      error: (error) => {
+        console.error('Error submitting form', error);
+      }
+    });
+  }
+
+  clearForm() {
+    this.customerName = '';
+    this.mappingGroupName = '';
+    this.status = '';
+    this.checked = false;
+  }
+
+  onUpdate(event: any): void {
+    this.checked = event.target.checked;
+    if (this.selectedData) {
+      this.selectedData.isEnabled = this.checked ? 1 : 0;
+    }
+  }
 }

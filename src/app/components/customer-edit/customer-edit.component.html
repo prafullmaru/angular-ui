@@ -14,7 +14,12 @@
 
         <!-- Active -->
         <ids-layout-grid-cell>
-            <ids-checkbox id="customerEditActiveCheckbox" label="Active" checked="true"></ids-checkbox>
+            <ids-checkbox label="Active" 
+            [checked]="checked"
+            (change)="onUpdate($event)"
+            >
+        </ids-checkbox>
+
         </ids-layout-grid-cell>
 
         <!-- Status -->
@@ -22,7 +27,9 @@
             <ids-dropdown id="customer-edit-status" label="Status">
                 <ids-list-box>
                     <ids-list-box-option value="blank" id="blank" aria-label="Blank"></ids-list-box-option>
-                    <ids-list-box-option id = "status" [value]="status">{{status}}</ids-list-box-option>
+                    <ids-list-box-option id = "status-initiate" value="Initiate">Initiate</ids-list-box-option>
+                    <ids-list-box-option id = "status-onGoing" value="Ongoing">Ongoing</ids-list-box-option>
+                    <ids-list-box-option id = "status-conclude" value="Conclude">Conclude</ids-list-box-option>
                 </ids-list-box>            
             </ids-dropdown>
         </ids-layout-grid-cell>

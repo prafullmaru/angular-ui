@@ -23,34 +23,16 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
 
 
   navigateTo(screen: string) {
-    switch (screen) {
-      case 'customer-new':
-        this.currentTitle = 'New Customer';
-        this.router.navigate([`/${screen}`]);
-        break;
-      case 'customer-inquiry':
-        this.currentTitle = 'Customer<br> Inquiry';
-        this.router.navigate([`/${screen}`]);
-        break;
-      case 'customer-edit':
-        this.currentTitle = 'Customer<br> Edit';
-        this.router.navigate([`/${screen}`]);
-        break;
-      case 'load-to-csi':
-        this.currentTitle = 'Extract, Transform, Load<br>Load Data Extracts';
-        this.router.navigate([`/${screen}`]);
-        break;
-      case 'load-csv-to-table':
-      this.currentTitle = 'Extract, Transform, Load<br>Import CSV File To Table';
-      this.router.navigate([`/${screen}`]);
-      break;
-      // case 'new-customer':
-      //   this.currentTitle = 'New Customer';
-      //   this.router.navigate(['Screen1Component']);
-      //   break;
-      default:
-        this.currentTitle = 'Title';
-    }
+    const screenTitles: { [key: string]: string } = {
+      'customer-new': 'New Customer',
+      'customer-inquiry': 'Customer<br> Inquiry',
+      'customer-edit': 'Customer<br> Edit',
+      'load-to-csi': 'Extract, Transform, Load<br>Load Data Extracts',
+      'load-csv-to-table': 'Extract, Transform, Load<br>Import CSV File To Table',
+    };
+  
+    this.currentTitle = screenTitles[screen] || 'Title';
+    this.router.navigate([`/${screen}`]);
   }
 
   ngOnInit() {

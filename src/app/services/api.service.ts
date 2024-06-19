@@ -28,4 +28,8 @@ export class ApiService {
     return this.http.get(`${this.baseUrl}/customers`);
   }
 
+  updateCustomer(customerData: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/customers`, customerData);
+  }
+
 }
